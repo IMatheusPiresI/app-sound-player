@@ -1,2 +1,3 @@
 # app-sound-player
+
 Project created with React Native, Typescript, Unit Test, Sound functionalities, background functionalities, and more....
