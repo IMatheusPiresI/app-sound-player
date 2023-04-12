@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "app-sound-player",
+    "slug": "app-sound-player",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
