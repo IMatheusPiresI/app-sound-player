@@ -33,7 +33,7 @@ module.exports = {
                 position: 'before',
               },
               {
-                pattern: 'expo*',
+                pattern: '^(@expo|expo)',
                 group: 'external',
                 position: 'before',
               },
