@@ -1,20 +1,23 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { Box, Text } from 'native-base';
+import { Box } from 'native-base';
 
 import { IViewProps } from './types';
 
 const ButtonSelectView: React.FC<IViewProps> = ({
   title,
+  rAnimatedText,
+  rAnimatedView,
   handleSelectOption,
 }) => (
-  <TouchableOpacity onPress={handleSelectOption}>
-    <Box>
-      <Text color={'#fff7'} mr="2" fontWeight={'bold'} fontSize={18}>
-        {title}
-      </Text>
-    </Box>
-  </TouchableOpacity>
+  <Box alignItems={'center'} justifyContent={'center'} flex={1}>
+    <Animated.View style={[rAnimatedView]}>
+      <TouchableOpacity onPress={handleSelectOption}>
+        <Animated.Text style={rAnimatedText}>{title}</Animated.Text>
+      </TouchableOpacity>
+    </Animated.View>
+  </Box>
 );
 export default ButtonSelectView;

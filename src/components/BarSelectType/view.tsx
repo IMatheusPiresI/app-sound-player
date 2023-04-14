@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ButtonSelect } from '@components/ButtonSelect';
 
-import { Box, HStack, VStack } from 'native-base';
+import { HStack, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
@@ -10,10 +10,10 @@ const BarSelectTypeView: React.FC<IViewProps> = ({
   selectedOption,
   handleSelectOption,
 }) => (
-  <VStack pt="statusBarHeight">
+  <VStack>
     <HStack
-      px="12"
       py="4"
+      h="20"
       justifyContent={'space-between'}
       alignItems={'center'}
     >
@@ -22,20 +22,16 @@ const BarSelectTypeView: React.FC<IViewProps> = ({
         selectedOption={selectedOption}
         selectOption={handleSelectOption}
       />
-      <Box>
-        <ButtonSelect
-          title="Music"
-          selectedOption={selectedOption}
-          selectOption={handleSelectOption}
-        />
-      </Box>
-      <Box>
-        <ButtonSelect
-          title="Design"
-          selectedOption={selectedOption}
-          selectOption={handleSelectOption}
-        />
-      </Box>
+      <ButtonSelect
+        title="Music"
+        selectedOption={selectedOption}
+        selectOption={handleSelectOption}
+      />
+      <ButtonSelect
+        title="Design"
+        selectedOption={selectedOption}
+        selectOption={handleSelectOption}
+      />
     </HStack>
   </VStack>
 );
