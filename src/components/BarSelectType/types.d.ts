@@ -1,10 +1,15 @@
 type IProps = {};
 
 type IViewProps = {
-  selectedOption: IOptionSelect;
+  option: ISelectedOption;
   handleSelectOption: (option: IOptionSelect) => void;
+};
+
+type ISelectedOption = {
+  selectedOption: IOptionSelect;
+  initial: boolean;
 };
 
 type IOptionSelect = 'Beauty' | 'Music' | 'Design';
 
-export { IProps, IViewProps, IOptionSelect };
+export { IProps, IViewProps, IOptionSelect, ISelectedOption };

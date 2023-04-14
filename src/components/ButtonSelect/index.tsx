@@ -12,7 +12,7 @@ import { IProps, IViewProps } from './types';
 
 export const ButtonSelect: React.FC<IProps> = ({
   title,
-  selectedOption,
+  option,
   selectOption,
 }) => {
   const selectedAnimate = useSharedValue(0);
@@ -30,7 +30,7 @@ export const ButtonSelect: React.FC<IProps> = ({
 
     return {
       color,
-      fontSize: interpolate(selectedAnimate.value, [0, 1], [18, 24]),
+      fontSize: interpolate(selectedAnimate.value, [0, 1], [18, 26]),
       fontWeight: 'bold',
     };
   });
@@ -41,11 +41,12 @@ export const ButtonSelect: React.FC<IProps> = ({
   }));
 
   useEffect(() => {
-    if (title === selectedOption) {
-      selectedAnimate.value = withTiming(1, { duration: 500 });
+    const duration = option.initial ? 50 : 500;
+    if (title === option.selectedOption) {
+      selectedAnimate.value = withTiming(1, { duration: duration });
       return;
     }
-    selectedAnimate.value = withTiming(0, { duration: 500 });
+    selectedAnimate.value = withTiming(0, { duration: duration });
   });
 
   const viewProps: IViewProps = {

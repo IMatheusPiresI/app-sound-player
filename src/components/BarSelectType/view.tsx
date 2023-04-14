@@ -7,7 +7,7 @@ import { HStack, VStack } from 'native-base';
 import { IViewProps } from './types';
 
 const BarSelectTypeView: React.FC<IViewProps> = ({
-  selectedOption,
+  option,
   handleSelectOption,
 }) => (
   <VStack>
@@ -19,17 +19,17 @@ const BarSelectTypeView: React.FC<IViewProps> = ({
     >
       <ButtonSelect
         title="Beauty"
-        selectedOption={selectedOption}
+        option={option}
         selectOption={handleSelectOption}
       />
       <ButtonSelect
         title="Music"
-        selectedOption={selectedOption}
+        option={option}
         selectOption={handleSelectOption}
       />
       <ButtonSelect
         title="Design"
-        selectedOption={selectedOption}
+        option={option}
         selectOption={handleSelectOption}
       />
     </HStack>

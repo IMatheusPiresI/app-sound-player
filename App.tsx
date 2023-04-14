@@ -2,6 +2,7 @@ import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { theme } from '@resources/theme';
+import 'react-native-gesture-handler';
 
 import { NativeBaseProvider } from 'native-base';
 

@@ -1,9 +1,8 @@
 import React, { createElement } from 'react';
 
+import { IViewProps } from './types';
 import View from './view';
-import { IProps, IViewProps } from './types';
-
-export const CarouselBanner: React.FC<IProps> = ({}) => {
+export const GenreSection: React.FC = () => {
   const viewProps: IViewProps = {};
 
   return createElement(View, viewProps);

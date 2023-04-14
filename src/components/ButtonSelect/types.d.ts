@@ -1,8 +1,11 @@
-import { IOptionSelect } from '@components/BarSelectType/types';
+import {
+  IOptionSelect,
+  ISelectedOption,
+} from '@components/BarSelectType/types';
 
 type IProps = {
   title: IOptionSelect;
-  selectedOption: IOptionSelect;
+  option: ISelectedOption;
   selectOption: (option: IOptionSelect) => void;
 };
 
