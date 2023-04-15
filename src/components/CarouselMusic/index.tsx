@@ -14,14 +14,14 @@ import { IProps, IViewProps } from './types';
 export const CarouselMusic: React.FC<IProps> = ({}) => {
   const scrollRef = useRef<FlatList>(null);
   const translateX = useSharedValue(0);
+  const spacing = 40.200000000000045;
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     translateX.value = event.nativeEvent.contentOffset.x;
-    console.log(translateX.value / (metrics.screenWidth60 + 19.6));
   };
 
   const activeIndex = useDerivedValue(
-    () => translateX.value / (metrics.screenWidth60 + 19.6),
+    () => translateX.value / (metrics.screenWidth70 + spacing),
   );
 
   const viewProps: IViewProps = {

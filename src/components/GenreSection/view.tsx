@@ -9,7 +9,7 @@ import { Box, FlatList, Text, VStack } from 'native-base';
 import { IViewProps } from './types';
 
 const GenreSectionView: React.FC<IViewProps> = () => (
-  <VStack mt="12">
+  <VStack mt="8">
     <Box w="full" alignItems={'center'} justifyContent="center">
       <Text fontWeight={'bold'} color={'#cacaca'} fontSize="22">
         Genre

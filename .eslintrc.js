@@ -20,6 +20,7 @@ module.exports = {
         'arrow-body-style': ['warn'],
         '@typescript-eslint/no-shadow': ['error'],
         'react-hooks/exhaustive-deps': 'warn',
+        'react/no-unstable-nested-components': 0,
         'no-shadow': 'off',
         'no-undef': 'off',
         'import/order': [

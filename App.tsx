@@ -2,17 +2,21 @@ import React from 'react';
 
 import { StatusBar } from 'expo-status-bar';
 import { theme } from '@resources/theme';
-import 'react-native-gesture-handler';
+import { AppRoutes } from '@routes/Stack/stack.routes';
+import { navigationRef } from '@routes/RootNavigation';
+import { NavigationContainer } from '@react-navigation/native';
 
 import { NativeBaseProvider } from 'native-base';
 
-import Home from './src/screens/Home';
+import 'react-native-gesture-handler';
 
 export default function App() {
   return (
     <NativeBaseProvider theme={theme}>
-      <StatusBar translucent backgroundColor="transparent" style="light" />
-      <Home />
+      <NavigationContainer ref={navigationRef}>
+        <StatusBar translucent backgroundColor="transparent" style="light" />
+        <AppRoutes />
+      </NavigationContainer>
     </NativeBaseProvider>
   );
 }

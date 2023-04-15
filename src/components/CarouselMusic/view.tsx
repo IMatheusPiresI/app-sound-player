@@ -19,7 +19,7 @@ const CarouselMusicView: React.FC<IViewProps> = ({
       ref={scrollRef}
       data={mockMusics}
       keyExtractor={(item) => item.id}
-      snapToInterval={metrics.screenWidth60 + 20}
+      snapToInterval={metrics.screenWidth70 + 40.5}
       decelerationRate="fast"
       scrollEventThrottle={16}
       contentContainerStyle={styles.list}
@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
     height: 350,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: metrics.screenWidth * 0.2 - 10,
+    paddingHorizontal: metrics.screenWidth * 0.15 - 20,
   },
 });

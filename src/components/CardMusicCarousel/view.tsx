@@ -72,9 +72,9 @@ export default CardMusicCarouselView;
 
 const styles = StyleSheet.create({
   container: {
-    width: metrics.screenWidth60,
+    width: metrics.screenWidth70,
     backgroundColor: '#000',
-    marginHorizontal: 10,
+    marginHorizontal: 20,
     borderRadius: 40,
   },
   shadow: {
