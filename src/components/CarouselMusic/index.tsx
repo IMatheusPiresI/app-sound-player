@@ -7,14 +7,20 @@ import {
 import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 
 import metrics from '@resources/theme/metrics';
+import { useNavigation } from '@react-navigation/native';
 
 import View from './view';
-import { IProps, IViewProps } from './types';
+import { IMusic, IProps, IViewProps } from './types';
 
 export const CarouselMusic: React.FC<IProps> = ({}) => {
+  const navigation = useNavigation();
   const scrollRef = useRef<FlatList>(null);
   const translateX = useSharedValue(0);
   const spacing = 40.200000000000045;
+
+  const handleGoToMusic = (music: IMusic) => {
+    navigation.navigate('Music', { music });
+  };
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     translateX.value = event.nativeEvent.contentOffset.x;
@@ -28,6 +34,7 @@ export const CarouselMusic: React.FC<IProps> = ({}) => {
     scrollRef,
     onScroll,
     activeIndex,
+    handleGoToMusic,
   };
 
   return createElement(View, viewProps);

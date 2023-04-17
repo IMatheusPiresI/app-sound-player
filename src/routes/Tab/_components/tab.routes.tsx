@@ -17,7 +17,7 @@ export default function TabRoutes() {
     >
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Favorites" component={Home} />
-      <Tab.Screen name="Music" component={Home} />
+      <Tab.Screen name="Album" component={Home} />
       <Tab.Screen name="Profile" component={Home} />
     </Tab.Navigator>
   );

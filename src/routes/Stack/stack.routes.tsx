@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import TabRoutes from '@routes/Tab/_components/tab.routes';
-import Home from '@screens/Home';
+import Music from '@screens/Music';
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,7 @@ export function AppRoutes() {
       }}
     >
       <Stack.Screen name="TabRoutes" component={TabRoutes} />
-      <Stack.Screen name="Song" component={Home} />
+      <Stack.Screen name="Music" component={Music} />
     </Stack.Navigator>
   );
 }

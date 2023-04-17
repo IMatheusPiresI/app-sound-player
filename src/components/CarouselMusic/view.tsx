@@ -11,8 +11,9 @@ import { IViewProps } from './types';
 
 const CarouselMusicView: React.FC<IViewProps> = ({
   scrollRef,
-  onScroll,
   activeIndex,
+  onScroll,
+  handleGoToMusic,
 }) => (
   <Box>
     <FlatList
@@ -23,6 +24,7 @@ const CarouselMusicView: React.FC<IViewProps> = ({
       decelerationRate="fast"
       scrollEventThrottle={16}
       contentContainerStyle={styles.list}
+      initialNumToRender={4}
       horizontal
       onScroll={onScroll}
       renderItem={({ item, index }) => (
@@ -30,6 +32,7 @@ const CarouselMusicView: React.FC<IViewProps> = ({
           index={index}
           activeIndex={activeIndex}
           music={item}
+          onPress={() => handleGoToMusic(item)}
         />
       )}
       overScrollMode="never"

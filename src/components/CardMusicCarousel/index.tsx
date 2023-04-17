@@ -12,6 +12,7 @@ export const CardMusicCarousel: React.FC<IProps> = ({
   activeIndex,
   index,
   music,
+  ...rest
 }) => {
   const rAnimatedCardVisible = useAnimatedStyle(() => ({
     height: interpolate(
@@ -36,6 +37,7 @@ export const CardMusicCarousel: React.FC<IProps> = ({
   const viewProps: IViewProps = {
     rAnimatedCardVisible,
     music,
+    ...rest,
   };
 
   return createElement(View, viewProps);

@@ -12,6 +12,7 @@ import { IViewProps } from './types';
 const CardMusicCarouselView: React.FC<IViewProps> = ({
   rAnimatedCardVisible,
   music,
+  ...rest
 }) => (
   <Animated.View
     style={[rAnimatedCardVisible, styles.container, styles.shadow]}
@@ -55,7 +56,7 @@ const CardMusicCarouselView: React.FC<IViewProps> = ({
             </Text>
           </VStack>
           <Box alignItems={'center'} justifyContent="center">
-            <TouchableOpacity>
+            <TouchableOpacity {...rest}>
               <MaterialIcons
                 name="play-circle-filled"
                 size={50}

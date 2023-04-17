@@ -1,3 +1,4 @@
+import { TouchableOpacityProps } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 type IProps = {
@@ -9,7 +10,7 @@ type IProps = {
     musicName: string;
     musicGenre: string;
   };
-};
+} & TouchableOpacityProps;
 
 type IViewProps = {
   rAnimatedCardVisible: {
@@ -21,6 +22,6 @@ type IViewProps = {
     musicName: string;
     musicGenre: string;
   };
-};
+} & TouchableOpacityProps;
 
 export { IProps, IViewProps };

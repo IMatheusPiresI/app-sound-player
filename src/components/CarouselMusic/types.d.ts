@@ -11,6 +11,15 @@ type IViewProps = {
   scrollRef: React.RefObject<FlatList<any>>;
   onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   activeIndex: Readonly<Animated.SharedValue<number>>;
+  handleGoToMusic: (music: IMusic) => void;
 };
 
-export { IProps, IViewProps };
+type IMusic = {
+  id: string;
+  imageBanner: string;
+  musicName: string;
+  musicGenre: string;
+  creator: string;
+};
+
+export { IProps, IViewProps, IMusic };

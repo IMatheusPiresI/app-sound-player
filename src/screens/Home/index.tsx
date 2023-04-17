@@ -1,4 +1,5 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Header } from '@components/Header';
 import { BarSelectType } from '@components/BarSelectType';
@@ -11,10 +12,15 @@ import { VStack } from 'native-base';
 const Home: React.FC = () => (
   <LinearGradient
     colors={['#262c2c', '#171414', '#262c2c']}
-    style={{ flex: 1 }}
+    style={styles.container}
   >
     <VStack flex={1} pt="statusBarHeight">
-      <Header />
+      <Header
+        iconLeft="notifications"
+        iconMid="microphone-alt"
+        iconRight="search"
+        textMid="Podcasts"
+      />
       <BarSelectType />
       <CarouselMusic />
       <GenreSection />
@@ -23,3 +29,9 @@ const Home: React.FC = () => (
 );
 
 export default Home;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
