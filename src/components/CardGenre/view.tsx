@@ -9,7 +9,7 @@ import { IViewProps } from './types';
 
 const CardGenreView: React.FC<IViewProps> = ({ genre }) => (
   <VStack style={styles.shadow}>
-    <Box w="30" h="30" borderRadius={'3xl'} overflow="hidden">
+    <Box w="28" h="28" borderRadius={'3xl'} overflow="hidden">
       <ImageBackground
         source={{
           uri: genre.imageBanner,

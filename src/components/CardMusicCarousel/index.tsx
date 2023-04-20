@@ -5,6 +5,8 @@ import {
   useAnimatedStyle,
 } from 'react-native-reanimated';
 
+import metrics from '@resources/theme/metrics';
+
 import { IProps, IViewProps } from './types';
 import View from './view';
 
@@ -14,11 +16,13 @@ export const CardMusicCarousel: React.FC<IProps> = ({
   music,
   ...rest
 }) => {
+  const HEIGHT_CARD = metrics.screenHeight25;
+  const HEIGHT_CARD_VISIBLE = metrics.screenHeight35;
   const rAnimatedCardVisible = useAnimatedStyle(() => ({
     height: interpolate(
       activeIndex.value,
       [-1, index - 1, index, index + 1],
-      [250, 250, 325, 250],
+      [HEIGHT_CARD, HEIGHT_CARD, HEIGHT_CARD_VISIBLE, HEIGHT_CARD],
       {
         extrapolateRight: Extrapolate.CLAMP,
         extrapolateLeft: Extrapolate.CLAMP,

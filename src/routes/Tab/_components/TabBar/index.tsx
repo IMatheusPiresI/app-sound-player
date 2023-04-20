@@ -2,6 +2,7 @@ import { Platform, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { AudioMiniPlayer } from '@components/AudioMiniPlayer';
 
 import { Box, HStack } from 'native-base';
 
@@ -16,6 +17,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
       bottom={0}
       pb={Platform.OS === 'ios' ? '2' : '0'}
     >
+      <AudioMiniPlayer />
       <HStack w="full" h="20">
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;

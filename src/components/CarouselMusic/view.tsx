@@ -43,7 +43,7 @@ export default CarouselMusicView;
 
 const styles = StyleSheet.create({
   list: {
-    height: 350,
+    height: metrics.screenHeight38,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: metrics.screenWidth * 0.15 - 20,

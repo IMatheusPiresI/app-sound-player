@@ -21,25 +21,37 @@ export const MusicPlayer: React.FC<IProps> = ({
   const isNotRunning = playerState === State.None;
   const selectedSong = idMusicSelected - 1;
 
+  const setupCurentSongAndOptions = useCallback(async () => {
+    await TrackPlayer.updateOptions({
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+        Capability.SkipToPrevious,
+      ],
+    });
+    await TrackPlayer.add(mockMusics);
+    await TrackPlayer.skip(selectedSong);
+    await TrackPlayer.play();
+  }, [selectedSong]);
+
   const setupTrackPlayer = useCallback(async () => {
     try {
       if (!isNotRunning) return;
       await TrackPlayer.setupPlayer();
-      await TrackPlayer.updateOptions({
-        capabilities: [
-          Capability.Play,
-          Capability.Pause,
-          Capability.SkipToNext,
-          Capability.SkipToPrevious,
-        ],
-      });
-      await TrackPlayer.add(mockMusics);
-      await TrackPlayer.skip(selectedSong);
-      await TrackPlayer.play();
+      await setupCurentSongAndOptions();
     } catch (err) {
-      await TrackPlayer.skip(selectedSong);
+      const trackIndex = await TrackPlayer.getCurrentTrack();
+      if (trackIndex === null) {
+        await setupCurentSongAndOptions();
+        return;
+      }
+      if (selectedSong !== trackIndex) {
+        await TrackPlayer.skip(selectedSong);
+      }
+      await TrackPlayer.play();
     }
-  }, [isNotRunning, selectedSong]);
+  }, [isNotRunning, selectedSong, setupCurentSongAndOptions]);
 
   const handleGoNextSong = async () => {
     try {
@@ -77,7 +89,9 @@ export const MusicPlayer: React.FC<IProps> = ({
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
       const track = (await TrackPlayer.getTrack(event.nextTrack)) as ITrack;
-      setMusicId(track.id);
+      if (event.position !== 0) {
+        setMusicId(track.id);
+      }
     }
   });
 
