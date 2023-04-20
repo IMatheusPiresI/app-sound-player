@@ -9,8 +9,9 @@ type IProps = {};
 
 type IViewProps = {
   scrollRef: React.RefObject<FlatList<any>>;
-  onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
+  allMusics: IMusic[];
   activeIndex: Readonly<Animated.SharedValue<number>>;
+  onScroll: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   handleGoToMusic: (music: IMusic) => void;
 };
 
@@ -20,6 +21,7 @@ type IMusic = {
   musicName: string;
   musicGenre: string;
   creator: string;
+  url: string;
 };
 
 export { IProps, IViewProps, IMusic };

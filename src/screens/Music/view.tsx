@@ -11,6 +11,7 @@ import { Box, HStack, Image, Text, VStack } from 'native-base';
 import { IViewProps } from './types';
 const MusicView: React.FC<IViewProps> = ({
   currentSong,
+  selectedMusicId,
   handleGoBack,
   setMusicId,
 }) => (
@@ -71,7 +72,7 @@ const MusicView: React.FC<IViewProps> = ({
       <Box px="12" flex={1}>
         <MusicPlayer
           setMusicId={setMusicId}
-          idMusicSelected={Number(currentSong.id)}
+          idMusicSelected={selectedMusicId}
         />
       </Box>
     </VStack>

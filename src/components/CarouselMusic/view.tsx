@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 
 import { CardMusicCarousel } from '@components/CardMusicCarousel';
 import metrics from '@resources/theme/metrics';
-import mockMusics from '@resources/mocks/mockMusics';
 
 import { Box, FlatList } from 'native-base';
 
@@ -12,13 +11,14 @@ import { IViewProps } from './types';
 const CarouselMusicView: React.FC<IViewProps> = ({
   scrollRef,
   activeIndex,
+  allMusics,
   onScroll,
   handleGoToMusic,
 }) => (
   <Box>
     <FlatList
       ref={scrollRef}
-      data={mockMusics}
+      data={allMusics}
       keyExtractor={(item) => item.id}
       snapToInterval={metrics.screenWidth70 + 40.5}
       decelerationRate="fast"

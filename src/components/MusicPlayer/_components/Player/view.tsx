@@ -13,10 +13,10 @@ const Player: React.FC<IViewProps> = ({
   handleGoNextSong,
   handleGoPrevSong,
   handleTogglePlay,
-  isPlaying,
+  isPaused,
 }) => {
   const renderIconPlayOrPause = () => {
-    if (isPlaying) {
+    if (!isPaused) {
       return <MaterialIcons name="pause" size={30} color="#000000" />;
     }
 

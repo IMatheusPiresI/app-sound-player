@@ -6,7 +6,7 @@ export default [
     musicName: 'Cardigan',
     musicGenre: 'R.A.P',
     creator: 'Don Toliver',
-    url: require('../../assets/audio/cardigan.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/cardigan.mp3?alt=media&token=95ca30b4-a2c3-47d6-9f65-cf7abe43213b',
   },
   {
     id: '2',
@@ -14,7 +14,7 @@ export default [
     musicName: 'SKELETONS',
     musicGenre: 'R.A.P',
     creator: 'Travis Scott',
-    url: require('../../assets/audio/skeletons.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/skeletons.mp3?alt=media&token=bc7ecd12-e5bf-4c7f-8ca7-3012b6e2df15',
   },
   {
     id: '3',
@@ -22,7 +22,7 @@ export default [
     musicName: 'Know no Batter',
     musicGenre: 'P.O.P',
     creator: 'Justin Bieber',
-    url: require('../../assets/audio/know-no-better.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/know-no-better.mp3?alt=media&token=1151418e-cf8f-4bfe-82da-68a37c021f67',
   },
   {
     id: '4',
@@ -30,7 +30,7 @@ export default [
     musicName: 'Con Altura',
     musicGenre: 'Dance',
     creator: 'ROSALÍA, J Balvin',
-    url: require('../../assets/audio/con-altura.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/con-altura.mp3?alt=media&token=00b8ffe4-636d-4a38-8b02-d538081601d7',
   },
   {
     id: '5',
@@ -39,7 +39,7 @@ export default [
     musicName: 'Sorri, Sou Rei',
     musicGenre: 'Eletronic',
     creator: 'KVSH',
-    url: require('../../assets/audio/sorri-sou-rei.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/sorri-sou-rei.mp3?alt=media&token=0f58c1be-8b7b-4fd7-85ab-39a62a0da0ec',
   },
   {
     id: '6',
@@ -49,7 +49,7 @@ export default [
     musicGenre: 'Funk',
     creator:
       'MC Kevin, Davi, Hariel, Don Juan, Kapela, Marks, G15, Ryan SP, Gaab (GR6 Explode)',
-    url: require('../../assets/audio/set-dos-casados.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/set-dos-casados.mp3?alt=media&token=67a3b231-5bc5-4e37-994e-f89d56ee6ef8',
   },
   {
     id: '7',
@@ -58,7 +58,7 @@ export default [
     musicName: 'Cavalo de Tróia',
     musicGenre: 'Funk',
     creator: 'MC Kevin',
-    url: require('../../assets/audio/cavalo-de-troia.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/cavalo-de-troia.mp3?alt=media&token=c2a39bec-0519-4ad6-9148-430e25a226c5',
   },
   {
     id: '8',
@@ -67,7 +67,7 @@ export default [
     musicName: "Sweet Child O' Mine",
     musicGenre: 'Rock',
     creator: "Guns N' Roses",
-    url: require('../../assets/audio/sweet-child.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/sweet-child.mp3?alt=media&token=5411fafa-09f9-47c7-9f8a-bfea4c22c996',
   },
   {
     id: '9',
@@ -76,7 +76,7 @@ export default [
     musicName: 'Recaída',
     musicGenre: 'Pagode',
     creator: 'Menos é Mais',
-    url: require('../../assets/audio/recaida.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/recaida.mp3?alt=media&token=09cd1a7e-3e45-4a15-86a8-07ef7649594d',
   },
   {
     id: '10',
@@ -85,7 +85,7 @@ export default [
     musicName: 'Deixa Acontecer',
     musicGenre: 'Pagode',
     creator: 'Xande de Pilares',
-    url: require('../../assets/audio/deixa-acontecer.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/deixa-acontecer.mp3?alt=media&token=f28130ff-bb17-4e4f-bae8-9e420a3de95d',
   },
   {
     id: '11',
@@ -94,6 +94,6 @@ export default [
     musicName: 'Se Eu Largar o Freio',
     musicGenre: 'Pagode',
     creator: 'Péricles',
-    url: require('../../assets/audio/se-eu-largar-o-freio.mp3'),
+    url: 'https://firebasestorage.googleapis.com/v0/b/app-song-music.appspot.com/o/se-eu-largar-o-freio.mp3?alt=media&token=bdfb6173-76f5-4f11-92c9-7aa7b4fbe921',
   },
 ];

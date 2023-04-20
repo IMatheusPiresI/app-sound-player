@@ -8,11 +8,12 @@ import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
 
 import metrics from '@resources/theme/metrics';
 import { useNavigation } from '@react-navigation/native';
+import { useMusicStore } from '@store/musics';
 
 import View from './view';
 import { IMusic, IProps, IViewProps } from './types';
-
 export const CarouselMusic: React.FC<IProps> = ({}) => {
+  const { allMusics } = useMusicStore((state) => state);
   const navigation = useNavigation();
   const scrollRef = useRef<FlatList>(null);
   const translateX = useSharedValue(0);
@@ -32,8 +33,9 @@ export const CarouselMusic: React.FC<IProps> = ({}) => {
 
   const viewProps: IViewProps = {
     scrollRef,
-    onScroll,
     activeIndex,
+    allMusics,
+    onScroll,
     handleGoToMusic,
   };
 

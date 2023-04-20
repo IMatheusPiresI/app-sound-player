@@ -10,7 +10,6 @@ const MusicPlayerView: React.FC<IViewProps> = ({
   handleGoNextSong,
   handleGoPrevSong,
   handleTogglePlay,
-  isPlaying,
 }) => (
   <VStack flex={1} justifyContent="space-between" pb="bottomSpace">
     <Slider />
@@ -19,7 +18,6 @@ const MusicPlayerView: React.FC<IViewProps> = ({
         handleGoNextSong={handleGoNextSong}
         handleGoPrevSong={handleGoPrevSong}
         handleTogglePlay={handleTogglePlay}
-        isPlaying={isPlaying}
       />
     </Box>
   </VStack>

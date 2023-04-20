@@ -7,7 +7,7 @@ import TrackPlayer, {
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 
-import mockMusics from '@resources/mocks/mockMusics';
+import { useMusicStore } from '@store/musics';
 
 import { IProps, ITrack, IViewProps } from './types';
 import View from './view';
@@ -16,10 +16,10 @@ export const MusicPlayer: React.FC<IProps> = ({
   idMusicSelected,
   setMusicId,
 }) => {
+  const { allMusics } = useMusicStore((state) => state);
   const playerState = usePlaybackState();
-  const isPlaying = playerState === State.Playing;
   const isNotRunning = playerState === State.None;
-  const selectedSong = idMusicSelected - 1;
+  const selectedSong = idMusicSelected;
 
   const setupCurentSongAndOptions = useCallback(async () => {
     await TrackPlayer.updateOptions({
@@ -30,10 +30,10 @@ export const MusicPlayer: React.FC<IProps> = ({
         Capability.SkipToPrevious,
       ],
     });
-    await TrackPlayer.add(mockMusics);
+    await TrackPlayer.add(allMusics);
     await TrackPlayer.skip(selectedSong);
     await TrackPlayer.play();
-  }, [selectedSong]);
+  }, [allMusics, selectedSong]);
 
   const setupTrackPlayer = useCallback(async () => {
     try {
@@ -58,7 +58,7 @@ export const MusicPlayer: React.FC<IProps> = ({
       await TrackPlayer.skipToNext();
     } catch (err) {
       await TrackPlayer.skip(0);
-      setMusicId(1);
+      setMusicId(0);
     }
   };
 
@@ -67,9 +67,9 @@ export const MusicPlayer: React.FC<IProps> = ({
       await TrackPlayer.skipToPrevious();
       setMusicId((prevState) => prevState - 1);
     } catch {
-      const musicTotalLenght = mockMusics.length;
+      const musicTotalLenght = allMusics.length;
       await TrackPlayer.skip(musicTotalLenght - 1);
-      setMusicId(musicTotalLenght);
+      setMusicId(musicTotalLenght - 1);
     }
   };
 
@@ -88,9 +88,12 @@ export const MusicPlayer: React.FC<IProps> = ({
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async (event) => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
-      const track = (await TrackPlayer.getTrack(event.nextTrack)) as ITrack;
       if (event.position !== 0) {
-        setMusicId(track.id);
+        const track = (await TrackPlayer.getTrack(event.nextTrack)) as ITrack;
+        const indexTrack = allMusics.findIndex(
+          (music) => music.id === track.id,
+        );
+        setMusicId(indexTrack);
       }
     }
   });
@@ -99,7 +102,6 @@ export const MusicPlayer: React.FC<IProps> = ({
     handleGoNextSong,
     handleGoPrevSong,
     handleTogglePlay,
-    isPlaying,
   };
 
   return createElement(View, viewProps);

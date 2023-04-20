@@ -4,15 +4,16 @@ import TrackPlayer, {
   usePlaybackState,
 } from 'react-native-track-player';
 
-import mockMusics from '@resources/mocks/mockMusics';
 import { IMusic } from '@components/CarouselMusic/types';
 import { useNavigation } from '@react-navigation/native';
+import { useMusicStore } from '@store/musics';
 
 import { IProps, IViewProps } from './types';
 import View from './view';
 
 export const AudioMiniPlayer: React.FC<IProps> = () => {
   const trackState = usePlaybackState();
+  const { allMusics } = useMusicStore((state) => state);
   const [currentSong, setCurrentSong] = useState<IMusic | undefined>(undefined);
   const navigation = useNavigation();
 
@@ -40,12 +41,8 @@ export const AudioMiniPlayer: React.FC<IProps> = () => {
     const track = await TrackPlayer.getCurrentTrack();
     if (track === null) return;
 
-    const currentTrackIndex = track + 1;
-    const currentMusic = mockMusics.find(
-      (music) => music.id === String(currentTrackIndex),
-    );
-    return setCurrentSong(currentMusic);
-  }, [trackState]);
+    return setCurrentSong(allMusics[track]);
+  }, [allMusics, trackState]);
 
   useEffect(() => {
     getCurrentSong();

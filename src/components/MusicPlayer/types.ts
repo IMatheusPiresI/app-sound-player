@@ -9,11 +9,10 @@ type IViewProps = {
   handleGoNextSong: () => Promise<void>;
   handleGoPrevSong: () => Promise<void>;
   handleTogglePlay: () => Promise<void>;
-  isPlaying: boolean;
 };
 
 type ITrack = {
-  id: number;
+  id: string;
 } & Track;
 
 export { IProps, IViewProps, ITrack };
