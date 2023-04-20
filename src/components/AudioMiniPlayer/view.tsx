@@ -6,6 +6,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Box, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
+import { Slider } from './_components/Slider';
 
 const AudioMiniPlayerView: React.FC<IViewProps> = ({
   trackState,
@@ -28,8 +29,8 @@ const AudioMiniPlayerView: React.FC<IViewProps> = ({
       <Box w="full" alignItems="center" px="2">
         <TouchableOpacity activeOpacity={0.8} onPress={handleNaviteToMusic}>
           <HStack
-            h="16"
             w={'full'}
+            h="16"
             bgColor={'#fff1'}
             borderRadius="6"
             px="4"
@@ -78,6 +79,9 @@ const AudioMiniPlayerView: React.FC<IViewProps> = ({
               </Box>
             </HStack>
           </HStack>
+          <Box zIndex={99} w="full" position="absolute" bottom={-18}>
+            <Slider />
+          </Box>
         </TouchableOpacity>
       </Box>
     );
