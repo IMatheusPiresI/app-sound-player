@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "791295894613",
+    "project_id": "app-song-music",
+    "storage_bucket": "app-song-music.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791295894613:android:f710a67bababe8e5f9a0dc",
+        "android_client_info": {
+          "package_name": "com.appsoundplayer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791295894613-qh0vdl366l9ubqfog406t4hdgesgjbgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL2-x5CdXV4Foi13rwDGPXY9MfIzZN4Xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791295894613-qh0vdl366l9ubqfog406t4hdgesgjbgt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "791295894613-8sot7kilcn1sm3afopg4t42bp5ml84hf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appsoundplayer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

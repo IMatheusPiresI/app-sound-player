@@ -4,11 +4,14 @@ export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       TabRoutes: undefined;
+      AppRoutes: undefined;
       Music: { music: IMusic };
       Home: undefined;
       Favorites: undefined;
       Album: undefined;
       Profile: undefined;
+      SignIn: undefined;
+      SignUp: undefined;
     }
   }
 }

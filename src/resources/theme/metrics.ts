@@ -29,6 +29,7 @@ export default {
   screenHeight25: height * 0.25,
   bottomSpace: isIOS ? getBottomSpace() : 0,
   statusBarHeight: getStatusBarHeight(),
+  14: 56,
   26: 104,
   28: 112,
   30: 120,

@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { StatusBar } from 'expo-status-bar';
+import * as SplashScreen from 'expo-splash-screen';
 import { theme } from '@resources/theme';
-import { AppRoutes } from '@routes/Stack/stack.routes';
 import { navigationRef } from '@routes/RootNavigation';
 import { NavigationContainer } from '@react-navigation/native';
-
-import { NativeBaseProvider } from 'native-base';
+import { observableUserAuth } from '@services/firebase/auth';
+import { AppRoutes } from '@routes/index';
 
 import 'react-native-gesture-handler';
 
+import { NativeBaseProvider } from 'native-base';
+
+SplashScreen.preventAutoHideAsync()
+  .then((result) =>
+    console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`),
+  )
+  .catch(console.warn); // it's good to explicitly catch and inspect any error
+
 export default function App() {
+  const [initializing, setInitializing] = useState<boolean>(true);
+  useEffect(() => {
+    observableUserAuth({
+      initializing,
+      setInitializing,
+    });
+
+    return observableUserAuth({
+      initializing,
+      setInitializing,
+    });
+  }, [initializing]);
+
+  if (!initializing) {
+    SplashScreen.hideAsync();
+  }
+
   return (
     <NativeBaseProvider theme={theme}>
       <NavigationContainer ref={navigationRef}>

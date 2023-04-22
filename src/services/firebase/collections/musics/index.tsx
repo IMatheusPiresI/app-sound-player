@@ -1,6 +1,5 @@
 import { IMusic } from '@components/CarouselMusic/types';
-
-import { db } from '..';
+import { db } from '@services/firebase/collections';
 
 const COLLECTION_NAME = 'musics';
 
