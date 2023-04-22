@@ -10,6 +10,8 @@ type IUser = {
 type IUserState = {
   user: IUser;
   setUser: (user: IUser) => void;
+  addMusicToFavorites: (music: IMusic) => void;
+  removeMusicToFavorites: (music: IMusic) => void;
 };
 
 export { IUserState, IUser };

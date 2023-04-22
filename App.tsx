@@ -12,12 +12,7 @@ import 'react-native-gesture-handler';
 
 import { NativeBaseProvider } from 'native-base';
 
-SplashScreen.preventAutoHideAsync()
-  .then((result) =>
-    console.log(`SplashScreen.preventAutoHideAsync() succeeded: ${result}`),
-  )
-  .catch(console.warn); // it's good to explicitly catch and inspect any error
-
+SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [initializing, setInitializing] = useState<boolean>(true);
   useEffect(() => {

@@ -1,5 +1,6 @@
 import { IUser } from '@store/user/types';
-import { db } from '@services/firebase/collections';
+import firestore, { db } from '@services/firebase/collections';
+import { IMusic } from '@components/CarouselMusic/types';
 
 import { ICreateUserDB } from './types';
 
@@ -28,4 +29,22 @@ const getUserById = async (userId: string) => {
     console.log(err);
   }
 };
-export { createUserInCollection, getUserById };
+
+const setMusicToFavorite = async (userId: string, music: IMusic) => {
+  await usersCollectionRef.doc(userId).update({
+    favorites: firestore.FieldValue.arrayUnion(music),
+  });
+};
+
+const removeMusicToFavorite = async (userId: string, music: IMusic) => {
+  await usersCollectionRef.doc(userId).update({
+    favorites: firestore.FieldValue.arrayRemove(music),
+  });
+};
+
+export {
+  createUserInCollection,
+  getUserById,
+  setMusicToFavorite,
+  removeMusicToFavorite,
+};

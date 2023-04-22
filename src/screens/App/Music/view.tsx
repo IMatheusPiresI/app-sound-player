@@ -12,6 +12,8 @@ import { IViewProps } from './types';
 const MusicView: React.FC<IViewProps> = ({
   currentSong,
   selectedMusicId,
+  isFavorited,
+  handleToogleFavorite,
   handleGoBack,
   setMusicId,
 }) => (
@@ -55,8 +57,12 @@ const MusicView: React.FC<IViewProps> = ({
           >
             {currentSong.musicName}
           </Text>
-          <TouchableOpacity>
-            <MaterialIcons name="favorite" size={34} color="#00e5ff" />
+          <TouchableOpacity onPress={handleToogleFavorite}>
+            <MaterialIcons
+              name="favorite"
+              size={34}
+              color={isFavorited ? '#00e5ff' : '#fff4'}
+            />
           </TouchableOpacity>
         </HStack>
         <Text
