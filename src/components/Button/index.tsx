@@ -7,9 +7,10 @@ export const Button: React.FC<IProps> = ({
   title,
   isLoading,
   disabled,
+  variant,
   ...rest
 }) => {
-  const viewProps = { title, isLoading, disabled, ...rest };
+  const viewProps = { title, isLoading, disabled, variant, ...rest };
 
   return createElement(View, viewProps);
 };

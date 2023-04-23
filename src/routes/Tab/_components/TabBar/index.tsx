@@ -12,9 +12,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
   return (
     <Box
       w="full"
-      backgroundColor="transparent"
-      position={'absolute'}
-      bottom={0}
+      backgroundColor="#262c2c"
       pb={Platform.OS === 'ios' ? '2' : '0'}
     >
       <AudioMiniPlayer />

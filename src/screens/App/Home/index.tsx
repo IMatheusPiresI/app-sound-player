@@ -27,13 +27,17 @@ const Home: React.FC = () => {
       colors={['#262c2c', '#171414', '#262c2c']}
       style={styles.container}
     >
-      <ScrollView flexGrow={1} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        flexGrow={1}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.containerScroll}
+      >
         <VStack flex={1} pt="statusBarHeight">
           <Header
             iconLeft="notifications"
-            iconMid="microphone-alt"
+            iconMid="library-music"
             iconRight="search"
-            textMid="Podcasts"
+            textMid="Musics"
           />
           <BarSelectType />
           <CarouselMusic />
@@ -48,5 +52,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerScroll: {
+    paddingBottom: 40,
   },
 });

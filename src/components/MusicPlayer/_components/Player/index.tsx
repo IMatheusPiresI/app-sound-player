@@ -10,7 +10,7 @@ export const Player: React.FC<IProps> = ({
   handleTogglePlay,
 }) => {
   const playerState = usePlaybackState();
-  const isPaused = playerState === State.Paused;
+  const isPaused = playerState !== State.Playing;
 
   const viewProps: IViewProps = {
     handleGoNextSong,

@@ -8,11 +8,16 @@ const ButtonView: React.FC<IViewProps> = ({
   title,
   isLoading,
   disabled,
+  variant,
   ...rest
 }) => (
   <TouchableOpacity
     activeOpacity={0.7}
-    style={[styles.button, disabled && styles.buttonDisabled]}
+    style={[
+      styles.button,
+      variant === 'black80' && styles.variantBlack80,
+      disabled && styles.buttonDisabled,
+    ]}
     {...rest}
   >
     {isLoading ? (
@@ -42,6 +47,9 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  variantBlack80: {
+    backgroundColor: '#0008',
   },
   buttonDisabled: {
     borderColor: '#fff6',
