@@ -7,6 +7,7 @@ type IViewProps = {
   isFavorited: boolean;
   currentSong: IMusic;
   selectedMusicId: number;
+  playList: IMusic[];
 };
 
 export { IViewProps };

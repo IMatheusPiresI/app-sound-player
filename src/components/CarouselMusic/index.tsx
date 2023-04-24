@@ -5,21 +5,35 @@ import {
   NativeSyntheticEvent,
 } from 'react-native';
 import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
+import TrackPlayer, {
+  State,
+  usePlaybackState,
+} from 'react-native-track-player';
 
 import metrics from '@resources/theme/metrics';
 import { useNavigation } from '@react-navigation/native';
 import { useMusicStore } from '@store/musics';
+import { usePlaylistStore } from '@store/playlist';
 
 import View from './view';
 import { IMusic, IProps, IViewProps } from './types';
 export const CarouselMusic: React.FC<IProps> = ({}) => {
   const { allMusics } = useMusicStore((state) => state);
+  const { playlistType, changePlayList } = usePlaylistStore((state) => state);
   const navigation = useNavigation();
   const scrollRef = useRef<FlatList>(null);
   const translateX = useSharedValue(0);
   const spacing = 40.200000000000045;
+  const playbackState = usePlaybackState();
+  const handleGoToMusic = async (music: IMusic) => {
+    if (playlistType !== 'AllMusics') {
+      changePlayList(allMusics);
+    }
 
-  const handleGoToMusic = (music: IMusic) => {
+    if (playbackState !== State.None && playlistType !== 'AllMusics') {
+      await TrackPlayer.reset();
+    }
+
     navigation.navigate('Music', { music });
   };
 

@@ -6,6 +6,7 @@ type IProps = {
 
 type IViewProps = {
   music: IMusic;
+  handlePlayMusicToFavorites: () => void;
 };
 
 export { IProps, IViewProps };

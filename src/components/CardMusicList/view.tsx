@@ -7,7 +7,10 @@ import { Box, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
-const CardMusicListView: React.FC<IViewProps> = ({ music }) => (
+const CardMusicListView: React.FC<IViewProps> = ({
+  music,
+  handlePlayMusicToFavorites,
+}) => (
   <Box w="full" alignItems="center">
     <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
       <HStack
@@ -35,7 +38,10 @@ const CardMusicListView: React.FC<IViewProps> = ({ music }) => (
           </Text>
         </VStack>
         <HStack alignItems={'center'}>
-          <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={handlePlayMusicToFavorites}
+          >
             <MaterialIcons name="play-arrow" size={30} color="#fff" />
           </TouchableOpacity>
         </HStack>

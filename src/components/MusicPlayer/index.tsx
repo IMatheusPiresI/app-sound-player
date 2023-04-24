@@ -7,16 +7,17 @@ import TrackPlayer, {
   useTrackPlayerEvents,
 } from 'react-native-track-player';
 
-import { useMusicStore } from '@store/musics';
+import { usePlaylistStore } from '@store/playlist';
 
 import { IProps, ITrack, IViewProps } from './types';
 import View from './view';
 
 export const MusicPlayer: React.FC<IProps> = ({
   idMusicSelected,
+  playList,
   setMusicId,
 }) => {
-  const { allMusics } = useMusicStore((state) => state);
+  const { currentPlaylist } = usePlaylistStore((state) => state);
   const playerState = usePlaybackState();
   const isNotRunning = playerState === State.None;
   const selectedSong = idMusicSelected;
@@ -30,10 +31,10 @@ export const MusicPlayer: React.FC<IProps> = ({
         Capability.SkipToPrevious,
       ],
     });
-    await TrackPlayer.add(allMusics);
+    await TrackPlayer.add(playList);
     await TrackPlayer.skip(selectedSong);
     await TrackPlayer.play();
-  }, [allMusics, selectedSong]);
+  }, [playList, selectedSong]);
 
   const setupTrackPlayer = useCallback(async () => {
     try {
@@ -67,7 +68,7 @@ export const MusicPlayer: React.FC<IProps> = ({
       await TrackPlayer.skipToPrevious();
       setMusicId((prevState) => prevState - 1);
     } catch {
-      const musicTotalLenght = allMusics.length;
+      const musicTotalLenght = currentPlaylist.length;
       await TrackPlayer.skip(musicTotalLenght - 1);
       setMusicId(musicTotalLenght - 1);
     }
@@ -90,9 +91,10 @@ export const MusicPlayer: React.FC<IProps> = ({
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
       if (event.position !== 0) {
         const track = (await TrackPlayer.getTrack(event.nextTrack)) as ITrack;
-        const indexTrack = allMusics.findIndex(
+        const indexTrack = currentPlaylist.findIndex(
           (music) => music.id === track.id,
         );
+
         setMusicId(indexTrack);
       }
     }

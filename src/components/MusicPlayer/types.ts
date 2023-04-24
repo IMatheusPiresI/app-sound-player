@@ -1,7 +1,10 @@
 import { Track } from 'react-native-track-player';
 
+import { IMusic } from '@components/CarouselMusic/types';
+
 type IProps = {
   idMusicSelected: number;
+  playList: IMusic[];
   setMusicId: React.Dispatch<React.SetStateAction<number>>;
 };
 

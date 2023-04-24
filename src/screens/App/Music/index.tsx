@@ -8,12 +8,12 @@ import React, {
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { IMusic } from '@components/CarouselMusic/types';
-import { useMusicStore } from '@store/musics';
 import {
   removeMusicToFavorite,
   setMusicToFavorite,
 } from '@services/firebase/collections/users';
 import { useUserStore } from '@store/user';
+import { usePlaylistStore } from '@store/playlist';
 
 import View from './view';
 import { IViewProps } from './types';
@@ -24,26 +24,28 @@ const Music: React.FC = () => {
   );
   const navigation = useNavigation();
   const route = useRoute();
-  const { music } = route.params as { music: IMusic };
-  const { allMusics } = useMusicStore((state) => state);
+  const { music } = route.params as {
+    music: IMusic;
+  };
   const [musicId, setMusicId] = useState<number>(0);
+  const { currentPlaylist } = usePlaylistStore((state) => state);
 
   const handleGoBack = () => {
     navigation.goBack();
   };
 
   const currentSong = useMemo(() => {
-    const currentMusic = allMusics[musicId];
+    const currentMusic = currentPlaylist[musicId];
 
     return currentMusic!;
-  }, [allMusics, musicId]);
+  }, [currentPlaylist, musicId]);
 
   const selectedMusicId = useMemo(() => {
-    const musicIndex = allMusics.findIndex(
+    const musicIndex = currentPlaylist.findIndex(
       (findMusic) => findMusic.id === music.id,
     );
     return musicIndex;
-  }, [allMusics, music.id]);
+  }, [currentPlaylist, music.id]);
 
   const isFavorited = useMemo(() => {
     const musicFavorited = user.favorites.find(
@@ -82,12 +84,12 @@ const Music: React.FC = () => {
   };
 
   const getInitialIndex = useCallback(() => {
-    const musicIndex = allMusics.findIndex(
+    const musicIndex = currentPlaylist.findIndex(
       (findMusic) => findMusic.id === music.id,
     );
 
     setMusicId(musicIndex);
-  }, [allMusics, music.id]);
+  }, [currentPlaylist, music.id]);
 
   useEffect(() => {
     getInitialIndex();
@@ -100,6 +102,7 @@ const Music: React.FC = () => {
     isFavorited,
     currentSong,
     selectedMusicId,
+    playList: currentPlaylist,
   };
   return createElement(View, viewProps);
 };

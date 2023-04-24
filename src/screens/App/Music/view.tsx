@@ -13,6 +13,7 @@ const MusicView: React.FC<IViewProps> = ({
   currentSong,
   selectedMusicId,
   isFavorited,
+  playList,
   handleToogleFavorite,
   handleGoBack,
   setMusicId,
@@ -77,6 +78,7 @@ const MusicView: React.FC<IViewProps> = ({
       </VStack>
       <Box px="12" flex={1}>
         <MusicPlayer
+          playList={playList}
           setMusicId={setMusicId}
           idMusicSelected={selectedMusicId}
         />
