@@ -12,7 +12,7 @@ const CardMusicListView: React.FC<IViewProps> = ({
   handlePlayMusicToFavorites,
 }) => (
   <Box w="full" alignItems="center">
-    <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
+    <TouchableOpacity activeOpacity={0.8} onPress={handlePlayMusicToFavorites}>
       <HStack
         w={'full'}
         h="16"
