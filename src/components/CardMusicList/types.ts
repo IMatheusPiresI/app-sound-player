@@ -6,6 +6,13 @@ type IProps = {
 
 type IViewProps = {
   music: IMusic;
+  rAnimatedRemoveFavorite: {
+    height: number;
+    transform: {
+      translateX: number;
+    }[];
+  };
+  deleteAnimate: () => void;
   handlePlayMusicToFavorites: () => void;
 };
 

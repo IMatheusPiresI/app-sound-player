@@ -5,6 +5,7 @@ import { IMusic } from '@components/CarouselMusic/types';
 
 type IViewProps = {
   favoriteMusics: IMusic[];
+  userFavorites: IMusic[];
   scrollAnimate: SharedValue<number>;
   rAnimatedSearchBox: {
     top: number;

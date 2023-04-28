@@ -18,7 +18,7 @@ const BannerFavoriteMusic: React.FC<IViewProps> = ({
   <Animated.View style={[rAnimatedBoxBanner]}>
     <Animated.Image
       source={{
-        uri: randomSong.imageBanner,
+        uri: randomSong?.imageBanner,
       }}
       resizeMode="cover"
       style={[rAnimatedImageBanner, styles.imageBackground]}

@@ -33,6 +33,7 @@ const Favorites: React.FC = () => {
 
   const viewProps: IViewProps = {
     favoriteMusics,
+    userFavorites: user.favorites,
     rAnimatedSearchBox,
     scrollAnimate,
     search,

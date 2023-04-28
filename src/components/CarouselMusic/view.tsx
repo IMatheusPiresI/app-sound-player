@@ -25,6 +25,7 @@ const CarouselMusicView: React.FC<IViewProps> = ({
       scrollEventThrottle={16}
       contentContainerStyle={styles.list}
       initialNumToRender={4}
+      showsHorizontalScrollIndicator={false}
       horizontal
       onScroll={onScroll}
       renderItem={({ item, index }) => (

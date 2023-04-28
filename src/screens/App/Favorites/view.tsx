@@ -12,51 +12,78 @@ import metrics from '@resources/theme/metrics';
 import { Box, VStack } from 'native-base';
 
 import { IViewProps } from './types';
-import { BannerFavoriteMusic } from './BannerFavoriteMusic';
+import { BannerFavoriteMusic } from './_components/BannerFavoriteMusic';
+import { EmptyFavorite } from './_components/EmptyFavorites';
 
 const FavoritesView: React.FC<IViewProps> = ({
   favoriteMusics,
   rAnimatedSearchBox,
   scrollAnimate,
   search,
+  userFavorites,
   scrollHandler,
   setSearch,
-}) => (
-  <LinearGradient
-    colors={['#262c2c', '#171414', '#262c2c']}
-    style={styles.container}
-  >
-    <KeyboardDismiss>
-      <VStack flex={1} pt="statusBarHeight">
-        <Header textMid="Favorites" iconMid={'favorite'} />
-        <VStack zIndex={99}>
-          <VStack position={'absolute'} w="full">
-            <Animated.View style={rAnimatedSearchBox}>
-              <Box px={4} w="full" mb="2">
-                <InputSearch value={search} onChangeText={setSearch} />
-              </Box>
-            </Animated.View>
-            <BannerFavoriteMusic scrollAnimate={scrollAnimate} />
+}) => {
+  const renderEmptyListFavoriteSearch = () => (
+    <EmptyFavorite title={`Nenhuma música com "${search}" \nencontrada!`} />
+  );
+
+  const renderEmptyList = () => (
+    <EmptyFavorite
+      title={`Adicione músicas aos favoritos\npara reproduzir apenas as melhores!`}
+    />
+  );
+
+  return (
+    <LinearGradient
+      colors={['#262c2c', '#171414', '#262c2c']}
+      style={styles.container}
+    >
+      <KeyboardDismiss>
+        <VStack flex={1} pt="statusBarHeight">
+          <Header textMid="Favorites" iconMid={'favorite'} />
+          <VStack zIndex={99}>
+            {userFavorites.length >= 1 && (
+              <VStack position={'absolute'} w="full">
+                <Animated.View style={rAnimatedSearchBox}>
+                  <Box px={4} w="full" mb="2">
+                    <InputSearch
+                      value={search}
+                      onChangeText={setSearch}
+                      maxLength={20}
+                    />
+                  </Box>
+                </Animated.View>
+                <BannerFavoriteMusic scrollAnimate={scrollAnimate} />
+              </VStack>
+            )}
           </VStack>
+          {userFavorites.length <= 0 ? (
+            renderEmptyList()
+          ) : (
+            <>
+              <VStack flex={1}>
+                <Animated.FlatList
+                  data={favoriteMusics}
+                  onScroll={scrollHandler}
+                  bounces={false}
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={(item) => item.id}
+                  renderItem={({ item }) => <CardMusicList music={item} />}
+                  scrollEventThrottle={16}
+                  contentContainerStyle={{
+                    paddingTop: metrics.screenHeight25 + 50,
+                  }}
+                  ListEmptyComponent={renderEmptyListFavoriteSearch}
+                />
+              </VStack>
+            </>
+          )}
         </VStack>
-        <VStack flex={1}>
-          <Animated.FlatList
-            data={favoriteMusics}
-            onScroll={scrollHandler}
-            bounces={false}
-            showsVerticalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <CardMusicList music={item} />}
-            scrollEventThrottle={16}
-            contentContainerStyle={{
-              paddingTop: metrics.screenHeight25 + 50,
-            }}
-          />
-        </VStack>
-      </VStack>
-    </KeyboardDismiss>
-  </LinearGradient>
-);
+      </KeyboardDismiss>
+    </LinearGradient>
+  );
+};
 
 export default FavoritesView;
 
