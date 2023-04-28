@@ -50,6 +50,7 @@ const observableUserAuth = ({
   setInitializing,
 }: IObservableCheck) => {
   auth().onAuthStateChanged(async (sessionUser) => {
+    console.log(sessionUser);
     if (sessionUser && initializing) {
       const userRecovered = await getUserById(sessionUser.uid);
 
@@ -64,6 +65,10 @@ const observableUserAuth = ({
       });
 
       setInitializing(false);
+    } else {
+      if (initializing) {
+        setInitializing(false);
+      }
     }
   });
 };

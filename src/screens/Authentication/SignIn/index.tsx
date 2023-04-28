@@ -1,7 +1,7 @@
 import React, { createElement, useState } from 'react';
 
 import { useFormik } from 'formik';
-import { StackActions, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { getAllMusics } from '@services/firebase/collections/musics';
 import { useMusicStore } from '@store/musics';
 import { loginWithEmailAndPassword } from '@services/firebase/auth';
@@ -39,7 +39,6 @@ const SignIn: React.FC = () => {
       setErrorGetMusics(true);
     } finally {
       setLoading(false);
-      navigation.dispatch(StackActions.replace('AppRoutes'));
     }
   };
 

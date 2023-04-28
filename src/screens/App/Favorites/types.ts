@@ -1,16 +1,17 @@
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
+import { SharedValue } from 'react-native-reanimated';
 
 import { IMusic } from '@components/CarouselMusic/types';
 
 type IViewProps = {
   favoriteMusics: IMusic[];
-  rAnimatedImageBanner: {
-    height: number;
-  };
+  scrollAnimate: SharedValue<number>;
   rAnimatedSearchBox: {
-    height: number;
+    top: number;
+    opacity: number;
   };
-
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
   scrollHandler: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
 };
 

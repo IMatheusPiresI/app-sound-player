@@ -44,7 +44,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
           const iconName: IIconName = {
             Home: 'home',
             Favorites: 'favorite',
-            Album: 'album',
+            Playlists: 'album',
             Profile: 'person',
           };
 

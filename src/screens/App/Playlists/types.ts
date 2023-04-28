@@ -1,0 +1,3 @@
+type IViewProps = {};
+
+export { IViewProps };
