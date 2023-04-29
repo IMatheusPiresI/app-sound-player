@@ -15,7 +15,7 @@ const BannerFavoriteMusic: React.FC<IViewProps> = ({
   randomSong,
   handlePlayMusicToFavorites,
 }) => (
-  <Animated.View style={[rAnimatedBoxBanner]}>
+  <Animated.View style={[rAnimatedBoxBanner, styles.hidden]}>
     <Animated.Image
       source={{
         uri: randomSong?.imageBanner,
@@ -52,5 +52,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position: 'absolute',
+  },
+
+  hidden: {
+    overflow: 'hidden',
   },
 });

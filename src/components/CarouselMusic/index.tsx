@@ -1,10 +1,9 @@
-import React, { createElement, useRef } from 'react';
+import React, { createElement } from 'react';
 import {
-  FlatList,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
-} from 'react-native';
-import { useDerivedValue, useSharedValue } from 'react-native-reanimated';
+  useAnimatedScrollHandler,
+  useDerivedValue,
+  useSharedValue,
+} from 'react-native-reanimated';
 import TrackPlayer, {
   State,
   usePlaybackState,
@@ -21,10 +20,10 @@ export const CarouselMusic: React.FC<IProps> = ({}) => {
   const { allMusics } = useMusicStore((state) => state);
   const { playlistType, changePlayList } = usePlaylistStore((state) => state);
   const navigation = useNavigation();
-  const scrollRef = useRef<FlatList>(null);
   const translateX = useSharedValue(0);
   const spacing = 40.200000000000045;
   const playbackState = usePlaybackState();
+
   const handleGoToMusic = async (music: IMusic) => {
     if (playlistType !== 'AllMusics') {
       changePlayList(allMusics);
@@ -37,16 +36,17 @@ export const CarouselMusic: React.FC<IProps> = ({}) => {
     navigation.navigate('Music', { music });
   };
 
-  const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    translateX.value = event.nativeEvent.contentOffset.x;
-  };
+  const onScroll = useAnimatedScrollHandler({
+    onScroll: (event) => {
+      translateX.value = event.contentOffset.x;
+    },
+  });
 
   const activeIndex = useDerivedValue(
     () => translateX.value / (metrics.screenWidth70 + spacing),
   );
 
   const viewProps: IViewProps = {
-    scrollRef,
     activeIndex,
     allMusics,
     onScroll,

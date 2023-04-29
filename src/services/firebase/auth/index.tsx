@@ -50,8 +50,7 @@ const observableUserAuth = ({
   setInitializing,
 }: IObservableCheck) => {
   auth().onAuthStateChanged(async (sessionUser) => {
-    console.log(sessionUser);
-    if (sessionUser && initializing) {
+    if (sessionUser && initializing && !useUserStore.getState().user.email) {
       const userRecovered = await getUserById(sessionUser.uid);
 
       if (!userRecovered) return;

@@ -1,45 +1,59 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useCallback } from 'react';
+import { ListRenderItemInfo, StyleSheet } from 'react-native';
+import Animated from 'react-native-reanimated';
 
 import { CardMusicCarousel } from '@components/CardMusicCarousel';
 import metrics from '@resources/theme/metrics';
 
-import { Box, FlatList } from 'native-base';
+import { Box } from 'native-base';
 
-import { IViewProps } from './types';
+import { IMusic, IViewProps } from './types';
 
 const CarouselMusicView: React.FC<IViewProps> = ({
-  scrollRef,
   activeIndex,
   allMusics,
   onScroll,
   handleGoToMusic,
-}) => (
-  <Box>
-    <FlatList
-      ref={scrollRef}
-      data={allMusics}
-      keyExtractor={(item) => item.id}
-      snapToInterval={metrics.screenWidth70 + 40.5}
-      decelerationRate="fast"
-      scrollEventThrottle={16}
-      contentContainerStyle={styles.list}
-      initialNumToRender={4}
-      showsHorizontalScrollIndicator={false}
-      horizontal
-      onScroll={onScroll}
-      renderItem={({ item, index }) => (
-        <CardMusicCarousel
-          index={index}
-          activeIndex={activeIndex}
-          music={item}
-          onPress={() => handleGoToMusic(item)}
-        />
-      )}
-      overScrollMode="never"
-    />
-  </Box>
-);
+}) => {
+  const renderItem = useCallback(
+    ({ item, index }: ListRenderItemInfo<IMusic>) => (
+      <CardMusicCarousel
+        index={index}
+        activeIndex={activeIndex}
+        music={item}
+        onPress={() => handleGoToMusic(item)}
+      />
+    ),
+    [activeIndex, handleGoToMusic],
+  );
+
+  return (
+    <Box>
+      <Animated.FlatList
+        removeClippedSubviews
+        data={allMusics}
+        keyExtractor={(item) => item.id}
+        snapToInterval={metrics.screenWidth70 + 40.5}
+        decelerationRate="fast"
+        scrollEventThrottle={16}
+        contentContainerStyle={styles.list}
+        getItemLayout={(_, index) => ({
+          length: metrics.screenWidth70 + 40,
+          offset: (metrics.screenWidth70 + 40) * index,
+          index,
+        })}
+        initialNumToRender={4}
+        maxToRenderPerBatch={4}
+        windowSize={8}
+        showsHorizontalScrollIndicator={false}
+        horizontal
+        onScroll={onScroll}
+        renderItem={renderItem}
+        overScrollMode="never"
+      />
+    </Box>
+  );
+};
 export default CarouselMusicView;
 
 const styles = StyleSheet.create({

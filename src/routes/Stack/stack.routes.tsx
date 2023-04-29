@@ -1,10 +1,34 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import TabRoutes from '@routes/Tab/_components/tab.routes';
 import SignIn from '@screens/Authentication/SignIn';
 import SignUp from '@screens/Authentication/SignUp';
 import Music from '@screens/App/Music';
+import {
+  StackNavigationOptions,
+  TransitionSpec,
+} from '@react-navigation/stack/lib/typescript/src/types';
 
 const Stack = createStackNavigator();
+
+const config: TransitionSpec = {
+  animation: 'timing',
+  config: {
+    duration: 250,
+  },
+};
+
+const stackScreenOptions: StackNavigationOptions = {
+  headerShown: false,
+  gestureEnabled: false,
+  transitionSpec: {
+    open: config,
+    close: config,
+  },
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+};
 
 export const StackRoutes = () => (
   <Stack.Navigator
@@ -20,7 +44,7 @@ export const StackRoutes = () => (
 export const StackAuthentication = () => (
   <Stack.Navigator
     screenOptions={{
-      headerShown: false,
+      ...stackScreenOptions,
     }}
   >
     <Stack.Screen name="SignIn" component={SignIn} />

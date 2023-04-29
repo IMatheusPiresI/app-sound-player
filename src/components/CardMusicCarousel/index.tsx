@@ -18,6 +18,7 @@ export const CardMusicCarousel: React.FC<IProps> = ({
 }) => {
   const HEIGHT_CARD = metrics.screenHeight25;
   const HEIGHT_CARD_VISIBLE = metrics.screenHeight35;
+
   const rAnimatedCardVisible = useAnimatedStyle(() => ({
     height: interpolate(
       activeIndex.value,

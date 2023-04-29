@@ -30,7 +30,7 @@ const MusicView: React.FC<IViewProps> = ({
         textMid="Playing now"
         handleIconLeftPress={handleGoBack}
       />
-      <Box alignItems={'center'} justifyContent={'center'} mt="8">
+      <Box alignItems={'center'} justifyContent={'center'} mt="4">
         <Box
           w={'screenWidth80'}
           h={'screenHeight45'}

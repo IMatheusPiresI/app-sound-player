@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import SongPhonePNG from '@assets/images/song-phone.png';
@@ -59,16 +54,15 @@ const SignInView: React.FC<IViewProps> = ({
                 onChangeText={formik.handleChange('password')}
               />
               <Text color="white" fontSize={12} textAlign="right">
-                Don&rsquo;t have an account?
-                <TouchableOpacity
-                  activeOpacity={0.7}
+                Don&rsquo;t have an account?{' '}
+                <Text
+                  color="blue.300"
+                  fontSize={12}
+                  ml="1"
                   onPress={handleGoToCreateAccount}
-                  style={styles.textButton}
                 >
-                  <Text color="blue.300" fontSize={12} ml="1">
-                    Create an account!
-                  </Text>
-                </TouchableOpacity>
+                  Create an account!
+                </Text>
               </Text>
             </VStack>
           </VStack>

@@ -9,7 +9,7 @@ import { IViewProps } from './types';
 
 const CardGenreView: React.FC<IViewProps> = ({ genre }) => (
   <VStack style={styles.shadow}>
-    <Box w="28" h="28" borderRadius={'3xl'} overflow="hidden">
+    <Box w="24" h="24" borderRadius={'3xl'} overflow="hidden">
       <ImageBackground
         source={{
           uri: genre.imageBanner,
@@ -26,6 +26,7 @@ const CardGenreView: React.FC<IViewProps> = ({ genre }) => (
             'transparent',
             '#0001',
             '#0005',
+            '#0005',
             '#0008',
             '#000',
           ]}
@@ -35,7 +36,7 @@ const CardGenreView: React.FC<IViewProps> = ({ genre }) => (
             fontWeight={'bold'}
             bottom={4}
             position="absolute"
-            fontSize={'20'}
+            fontSize={'16'}
             color="white"
           >
             {genre.genre}
@@ -54,8 +55,8 @@ const styles = StyleSheet.create({
   },
 
   linearGradient: {
-    width: 120,
-    height: 120,
+    width: '100%',
+    height: '100%',
     zIndex: 99,
     position: 'absolute',
     alignItems: 'center',
