@@ -5,7 +5,11 @@ type IProps = {
   children: React.ReactNode;
 };
 export const KeyboardDismiss: React.FC<IProps> = ({ children }) => (
-  <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={styles.container}>
+  <TouchableWithoutFeedback
+    onPress={Keyboard.dismiss}
+    touchSoundDisabled
+    style={styles.container}
+  >
     {children}
   </TouchableWithoutFeedback>
 );

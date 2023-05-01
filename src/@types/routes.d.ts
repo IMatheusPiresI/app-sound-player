@@ -6,6 +6,7 @@ export declare global {
       TabRoutes: undefined;
       AppRoutes: undefined;
       Music: { music: IMusic };
+      PlaylistCreate: undefined;
       Home: undefined;
       Favorites: undefined;
       Album: undefined;

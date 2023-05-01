@@ -71,9 +71,7 @@ const FavoritesView: React.FC<IViewProps> = ({
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => <CardMusicList music={item} />}
                   scrollEventThrottle={16}
-                  contentContainerStyle={{
-                    paddingTop: metrics.screenHeight25 + 50,
-                  }}
+                  contentContainerStyle={styles.containerScroll}
                   ListEmptyComponent={renderEmptyListFavoriteSearch}
                 />
               </VStack>
@@ -90,5 +88,9 @@ export default FavoritesView;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  containerScroll: {
+    paddingTop: metrics.screenHeight25 + 50,
+    paddingBottom: metrics.tabBarHeight + 20,
   },
 });

@@ -10,6 +10,7 @@ import {
   StackNavigationOptions,
   TransitionSpec,
 } from '@react-navigation/stack/lib/typescript/src/types';
+import PlaylistCreate from '@screens/App/Playlist';
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export const StackRoutes = () => (
   >
     <Stack.Screen name="TabRoutes" component={TabRoutes} />
     <Stack.Screen name="Music" component={Music} />
+    <Stack.Screen name="PlaylistCreate" component={PlaylistCreate} />
   </Stack.Navigator>
 );
 

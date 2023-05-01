@@ -12,7 +12,7 @@ const InputSearchView: React.FC<IViewProps> = ({
   handleFocus,
   ...rest
 }) => (
-  <VStack w="full" justifyContent="center">
+  <VStack flex={1} justifyContent="center">
     <Input
       {...rest}
       w="full"

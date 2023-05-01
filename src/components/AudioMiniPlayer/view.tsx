@@ -31,7 +31,7 @@ const AudioMiniPlayerView: React.FC<IViewProps> = ({
           <HStack
             w={'full'}
             h="16"
-            bgColor={'#fff1'}
+            bgColor={'#3a3a3a'}
             borderRadius="6"
             px="4"
             alignItems="center"

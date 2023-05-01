@@ -6,6 +6,7 @@ import { BarSelectType } from '@components/BarSelectType';
 import { CarouselMusic } from '@components/CarouselMusic';
 import { GenreSection } from '@components/GenreSection';
 import { LinearGradient } from 'expo-linear-gradient';
+import metrics from '@resources/theme/metrics';
 
 import { ScrollView, VStack } from 'native-base';
 
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   containerScroll: {
-    paddingBottom: 40,
+    paddingBottom: metrics.tabBarHeight + 20,
   },
 });
