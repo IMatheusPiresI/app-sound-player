@@ -5,6 +5,7 @@ type IProps = {
   isLoading?: boolean;
   variant?: 'black80';
   disabled?: boolean;
+  small?: boolean;
 } & TouchableOpacityProps;
 
 type IViewProps = {
@@ -12,6 +13,7 @@ type IViewProps = {
   isLoading?: boolean;
   variant?: 'black80';
   disabled?: boolean;
+  small?: boolean;
 } & TouchableOpacityProps;
 
 export { IProps, IViewProps };

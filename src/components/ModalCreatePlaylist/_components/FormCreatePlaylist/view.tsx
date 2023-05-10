@@ -32,8 +32,8 @@ const FormCreatePlaylistView: React.FC<IViewProps> = ({
           }}
           alt="playlist image"
           resizeMode="cover"
-          w="40"
-          h="40"
+          w="34"
+          h="34"
         />
       </TouchableOpacity>
     </Box>

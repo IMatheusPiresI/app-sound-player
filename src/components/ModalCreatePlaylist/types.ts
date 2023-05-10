@@ -1,3 +1,5 @@
+import { IMusic } from '@components/CarouselMusic/types';
+
 type IProps = {
   isVisible: boolean;
   handleClose: () => void;
@@ -9,16 +11,24 @@ type IViewProps = {
   playlistName: string;
   validStep: boolean;
   rAnimateSelectMusics: {
-    left: number;
+    transform: {
+      translateX: number;
+    }[];
     opacity: number;
+    zIndex: number;
   };
   rAnimateFormCreatePlaylist: {
-    left: number;
+    transform: {
+      translateX: number;
+    }[];
     opacity: number;
+    left: number;
   };
+  selectedMusics: IMusic[];
   handleNextStep: () => void;
+  handleToogleSelectMusic: (music: IMusic) => void;
   setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
-  handleClose: () => void;
+  handleCloseModal: () => void;
   setImagePlaylist: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
