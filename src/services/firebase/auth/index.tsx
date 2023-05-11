@@ -5,6 +5,7 @@ import { getAllMusics } from '@services/firebase/collections/musics';
 
 import { createUserInCollection, getUserById } from '../collections/users';
 import { IObservableCheck, IPayloadEmailPassword } from './types';
+import { getAllPlaylists } from '../collections/playlist';
 
 const registerWithEmailAndPassword = async ({
   email,
@@ -52,10 +53,17 @@ const observableUserAuth = ({
   auth().onAuthStateChanged(async (sessionUser) => {
     if (sessionUser && initializing && !useUserStore.getState().user.email) {
       const userRecovered = await getUserById(sessionUser.uid);
+      const playlists = await getAllPlaylists();
 
       if (!userRecovered) return;
+      const userPlaylists = playlists.filter(
+        (playlist) => playlist.creator.id === userRecovered.id,
+      );
       useUserStore.setState({
-        user: userRecovered,
+        user: {
+          ...userRecovered,
+          playlists: userPlaylists!,
+        },
       });
 
       const allMusics = await getAllMusics();

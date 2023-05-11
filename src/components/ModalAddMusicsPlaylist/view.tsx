@@ -1,32 +1,23 @@
 import React from 'react';
 import RNModal from 'react-native-modal';
 import { StyleSheet } from 'react-native';
-import Animated from 'react-native-reanimated';
 
 import { Button } from '@components/Button';
 import { KeyboardDismiss } from '@components/Form/KeyboardDismiss';
 import metrics from '@resources/theme/metrics';
+import { SelectMusicsPlaylist } from '@components/ModalCreatePlaylist/_components/SelectMusicsPlaylist';
 
 import { Box, VStack } from 'native-base';
 
 import { IViewProps } from './types';
-import { FormCreatePlaylist } from './_components/FormCreatePlaylist';
-import { SelectMusicsPlaylist } from './_components/SelectMusicsPlaylist';
 
-const ModalCreatePlaylistView: React.FC<IViewProps> = ({
+const ModalAddMusicsPlaylistView: React.FC<IViewProps> = ({
   isVisible,
-  imagePlaylist,
-  playlistName,
-  validStep,
-  rAnimateFormCreatePlaylist,
   selectedMusics,
-  rAnimateSelectMusics,
+  musicsWithoutPlaylist,
   loading,
-  handleCreatePlaylist,
+  handleAddMusicsPlaylist,
   handleToogleSelectMusic,
-  handleNextStep,
-  setPlaylistName,
-  setImagePlaylist,
   handleCloseModal,
 }) => (
   <RNModal
@@ -48,44 +39,29 @@ const ModalCreatePlaylistView: React.FC<IViewProps> = ({
         maxHeight="modalCreatePlaylist"
         borderRadius={10}
         overflow="hidden"
+        px="4"
+        py="4"
       >
-        <Animated.View style={[styles.formCreate, rAnimateFormCreatePlaylist]}>
-          <FormCreatePlaylist
-            imagePlaylist={imagePlaylist}
-            playlistName={playlistName}
-            setPlaylistName={setPlaylistName}
-            setImagePlaylist={setImagePlaylist}
+        <SelectMusicsPlaylist
+          selectedMusics={selectedMusics}
+          toggleSelectMusic={handleToogleSelectMusic}
+          customMusics={musicsWithoutPlaylist}
+        />
+        <Box>
+          <Button
+            title="Add"
+            disabled={selectedMusics.length === 0 || loading}
+            isLoading={loading}
+            onPress={handleAddMusicsPlaylist}
+            small
           />
-          <Box mt="4">
-            <Button
-              title="Next"
-              disabled={!validStep}
-              onPress={handleNextStep}
-              small
-            />
-          </Box>
-        </Animated.View>
-        <Animated.View style={[styles.selectMusic, rAnimateSelectMusics]}>
-          <SelectMusicsPlaylist
-            selectedMusics={selectedMusics}
-            toggleSelectMusic={handleToogleSelectMusic}
-          />
-          <Box>
-            <Button
-              title="Create"
-              disabled={selectedMusics.length === 0 || loading}
-              onPress={handleCreatePlaylist}
-              isLoading={loading}
-              small
-            />
-          </Box>
-        </Animated.View>
+        </Box>
       </VStack>
     </KeyboardDismiss>
   </RNModal>
 );
 
-export default ModalCreatePlaylistView;
+export default ModalAddMusicsPlaylistView;
 
 const styles = StyleSheet.create({
   modal: {

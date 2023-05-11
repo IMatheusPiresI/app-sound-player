@@ -7,8 +7,13 @@ import {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import uuid from 'react-native-uuid';
 
 import { IMusic } from '@components/CarouselMusic/types';
+import { firebase } from '@react-native-firebase/firestore';
+import { useUserStore } from '@store/user';
+import { IPlaylist } from '@services/firebase/collections/users/types';
+import { useNavigation } from '@react-navigation/native';
 
 import { IProps, IViewProps } from './types';
 import View from './view';
@@ -17,11 +22,14 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
   isVisible,
   handleClose,
 }) => {
+  const navigation = useNavigation();
   const stepAnimate = useSharedValue(0);
+  const { user, userAddPlaylist } = useUserStore();
   const [imagePlaylist, setImagePlaylist] = useState<string | null>(null);
   const [playlistName, setPlaylistName] = useState<string>('');
   const [selectedMusics, setSelectedMusics] = useState<IMusic[]>([]);
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleCloseModal = () => {
     stepAnimate.value = withDelay(800, withTiming(0, { duration: 0 }));
@@ -29,6 +37,31 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
     setSelectedMusics([]);
     setPlaylistName('');
     handleClose();
+  };
+
+  const handleCreatePlaylist = async () => {
+    setLoading(true);
+    const playlistRef = firebase.firestore().collection('playlist').doc();
+    const playlist: IPlaylist = {
+      id: String(uuid.v4()),
+      creator: {
+        id: user.id,
+        name: user.name,
+      },
+      name: playlistName,
+      imageBanner: imagePlaylist ?? '',
+      musics: selectedMusics,
+    };
+
+    try {
+      await playlistRef.set(playlist);
+      userAddPlaylist(playlist);
+      navigation.navigate('Playlist', { playlist });
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleToogleSelectMusic = useCallback(
@@ -114,7 +147,9 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
     rAnimateFormCreatePlaylist,
     rAnimateSelectMusics,
     selectedMusics,
+    loading,
     handleToogleSelectMusic,
+    handleCreatePlaylist,
     handleNextStep,
     setPlaylistName,
     handleCloseModal,

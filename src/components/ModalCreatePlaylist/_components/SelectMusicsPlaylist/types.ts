@@ -2,6 +2,7 @@ import { IMusic } from '@components/CarouselMusic/types';
 
 type IProps = {
   selectedMusics: IMusic[];
+  customMusics?: IMusic[];
   toggleSelectMusic: (music: IMusic) => void;
 };
 

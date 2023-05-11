@@ -4,7 +4,6 @@ import { ListRenderItemInfo, StyleSheet } from 'react-native';
 import { InputSearch } from '@components/Form/InputSearch';
 import { CardMusicSelect } from '@components/CardMusicSelect';
 import { IMusic } from '@components/CarouselMusic/types';
-import { Button } from '@components/Button';
 
 import { Box, FlatList, Text, VStack } from 'native-base';
 
@@ -65,7 +64,6 @@ const SelectMusicsPlaylistView: React.FC<IViewProps> = ({
           />
         )}
       </VStack>
-      <Button title="Create" small />
     </VStack>
   );
 };

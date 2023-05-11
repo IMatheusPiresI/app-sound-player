@@ -6,7 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Header } from '@components/Header';
 import { InputSearch } from '@components/Form/InputSearch';
 import { KeyboardDismiss } from '@components/Form/KeyboardDismiss';
-import { CardMusicList } from '@components/CardMusicList';
+import { CardMusicListFavorite } from '@components/CardMusicListFavorite';
 import metrics from '@resources/theme/metrics';
 
 import { Box, VStack } from 'native-base';
@@ -69,7 +69,9 @@ const FavoritesView: React.FC<IViewProps> = ({
                   bounces={false}
                   showsVerticalScrollIndicator={false}
                   keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => <CardMusicList music={item} />}
+                  renderItem={({ item }) => (
+                    <CardMusicListFavorite music={item} />
+                  )}
                   scrollEventThrottle={16}
                   contentContainerStyle={styles.containerScroll}
                   ListEmptyComponent={renderEmptyListFavoriteSearch}

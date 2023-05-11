@@ -1,5 +1,7 @@
 import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native';
 
+import { IPlaylist } from '@services/firebase/collections/users/types';
+
 type IViewProps = {
   rAnimatedHideSearch: {
     transform: {
@@ -13,6 +15,7 @@ type IViewProps = {
     }[];
   };
   showModalCreatePlaylist: boolean;
+  playlists: IPlaylist[];
   scrollHandler: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   handleShowModalCreatePlaylist: () => void;
   handleCloseModalCreatePlaylist: () => void;

@@ -7,10 +7,15 @@ import {
   useSharedValue,
 } from 'react-native-reanimated';
 
+import { useUserStore } from '@store/user';
+
 import { IViewProps } from './types';
 import View from './view';
 
 const Playlists: React.FC = () => {
+  const {
+    user: { playlists },
+  } = useUserStore();
   const [showModalCreatePlaylist, setShowModalCreatePlaylist] =
     useState<boolean>(false);
   const scrollAnimate = useSharedValue(0);
@@ -66,6 +71,7 @@ const Playlists: React.FC = () => {
     rAnimatedHideSearch,
     rAnimatedNewPlaylist,
     showModalCreatePlaylist,
+    playlists,
     scrollHandler,
     handleShowModalCreatePlaylist,
     handleCloseModalCreatePlaylist,

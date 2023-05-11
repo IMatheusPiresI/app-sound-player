@@ -1,40 +1,114 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ListRenderItemInfo, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { LinearGradient } from 'expo-linear-gradient';
 import { Header } from '@components/Header';
-import metrics from '@resources/theme/metrics';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { CardMusicListPlay } from '@components/CardMusicListPlay';
+import { IMusic } from '@components/CarouselMusic/types';
+import { ModalAddMusicsPlaylist } from '@components/ModalAddMusicsPlaylist';
 
-import { Box, Image, VStack } from 'native-base';
+import { Box, FlatList, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
-const PlaylistCreateView: React.FC<IViewProps> = ({}) => (
-  <LinearGradient
-    colors={['#262c2c', '#171414', '#262c2c']}
-    style={styles.container}
-  >
-    <VStack flex={1} pt="statusBarHeight">
-      <Header
-        textMid="Create Playlist"
-        iconMid="album"
-        iconLeft="chevron-left"
-      />
-      <VStack flex={1}>
-        <Box w="full" h="20">
-          <Image
-            source={{
-              uri: '',
-            }}
-            alt="selected image"
-          />
-        </Box>
-      </VStack>
-    </VStack>
-  </LinearGradient>
-);
+const PlaylistView: React.FC<IViewProps> = ({
+  playlist,
+  showModalAddMusic,
+  handleGoBack,
+  handleCloseModalAddMusic,
+  handleOpenModalAddMusic,
+}) => {
+  const renderListItem = ({ item }: ListRenderItemInfo<IMusic>) => (
+    <CardMusicListPlay music={item} />
+  );
 
-export default PlaylistCreateView;
+  return (
+    <LinearGradient
+      colors={['#262c2c', '#171414', '#262c2c']}
+      style={styles.container}
+    >
+      <VStack flex={1} pt="statusBarHeight">
+        <Header
+          textMid="Playlist"
+          iconMid="album"
+          iconLeft="chevron-left"
+          handleIconLeftPress={handleGoBack}
+        />
+        <VStack flex={1}>
+          <Box w="full" alignItems={'center'} mt="2">
+            <Image
+              source={{
+                uri: playlist.imageBanner,
+              }}
+              alt="selected image"
+              w={'40'}
+              h={'40'}
+            />
+          </Box>
+          <HStack w="full" px="6" mt="2">
+            <Box w="full">
+              <Text color="white" fontSize={16} numberOfLines={1}>
+                {playlist.name}
+              </Text>
+              <HStack alignItems={'center'} mt="1">
+                <MaterialIcons name="person" size={16} color="white" />
+                <Text color="white" fontSize={12} ml="1">
+                  Creator
+                </Text>
+              </HStack>
+              <HStack alignItems={'center'} mt="1">
+                <MaterialIcons name="music-note" size={16} color="white" />
+                <Text color="white" fontSize={12} ml="1">
+                  {playlist?.musics?.length > 1
+                    ? playlist.musics.length + ' musics'
+                    : playlist.musics.length + ' music'}
+                </Text>
+              </HStack>
+            </Box>
+          </HStack>
+          <VStack flex={1} mt="2">
+            <FlatList
+              data={playlist.musics}
+              keyExtractor={(item) => item.id}
+              renderItem={renderListItem}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.contentContainerList}
+              ListHeaderComponent={() => (
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={handleOpenModalAddMusic}
+                >
+                  <HStack h="16" bgColor={'#fff1'} alignItems={'center'} px="4">
+                    <Box
+                      w="12"
+                      h="12"
+                      alignItems={'center'}
+                      justifyContent={'center'}
+                      backgroundColor={'#fff1'}
+                    >
+                      <MaterialIcons name="add" size={38} color="#fff6" />
+                    </Box>
+                    <Text color="white" fontSize={16} ml="4">
+                      Add music to playlist
+                    </Text>
+                  </HStack>
+                </TouchableOpacity>
+              )}
+            />
+          </VStack>
+        </VStack>
+        <ModalAddMusicsPlaylist
+          isVisible={showModalAddMusic}
+          handleClose={handleCloseModalAddMusic}
+          playlist={playlist}
+        />
+      </VStack>
+    </LinearGradient>
+  );
+};
+
+export default PlaylistView;
 
 const styles = StyleSheet.create({
   container: {
@@ -44,12 +118,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   contentContainerList: {
-    gap: 10,
-    paddingTop: 60,
-    paddingHorizontal: metrics.screenWidth5,
-    paddingBottom: metrics.tabBarHeight + 20,
-    flexGrow: 1,
+    gap: 1,
   },
-
-  searchFront: {},
 });

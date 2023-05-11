@@ -9,6 +9,7 @@ export const useUserStore = create<IUserState>((set) => ({
     name: '',
     photoURL: '',
     favorites: [],
+    playlists: [],
   },
   setUser: (user) =>
     set(() => ({
@@ -28,6 +29,13 @@ export const useUserStore = create<IUserState>((set) => ({
         favorites: state.user.favorites.filter(
           (musicCheck) => musicCheck.id !== music.id,
         ),
+      },
+    })),
+  userAddPlaylist: (playlist) =>
+    set((state) => ({
+      user: {
+        ...state.user,
+        playlists: [...state.user.playlists, playlist],
       },
     })),
 }));

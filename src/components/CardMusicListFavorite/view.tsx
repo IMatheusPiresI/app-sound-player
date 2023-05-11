@@ -8,7 +8,7 @@ import { Box, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
-const CardMusicListView: React.FC<IViewProps> = ({
+const CardMusicListFavoriteView: React.FC<IViewProps> = ({
   music,
   rAnimatedRemoveFavorite,
   deleteAnimate,
@@ -73,4 +73,4 @@ const CardMusicListView: React.FC<IViewProps> = ({
   </Animated.View>
 );
 
-export default CardMusicListView;
+export default CardMusicListFavoriteView;

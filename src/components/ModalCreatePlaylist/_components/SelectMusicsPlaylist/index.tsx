@@ -7,18 +7,20 @@ import { IProps, IViewProps } from './types';
 
 export const SelectMusicsPlaylist: React.FC<IProps> = ({
   selectedMusics,
+  customMusics,
   toggleSelectMusic,
 }) => {
   const { allMusics } = useMusicStore();
   const [search, setSearch] = useState<string>('');
-  const filteredMusics = allMusics.filter(
+  const musics = customMusics ?? allMusics;
+  const filteredMusics = musics.filter(
     (music) =>
       music.musicName.toLowerCase().includes(search.toLowerCase()) ||
       music.creator.toLowerCase().includes(search.toLowerCase()),
   );
 
   const viewProps: IViewProps = {
-    allMusics,
+    allMusics: customMusics ?? allMusics,
     selectedMusics,
     filteredMusics,
     search,

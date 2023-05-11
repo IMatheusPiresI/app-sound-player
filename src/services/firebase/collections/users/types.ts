@@ -8,4 +8,15 @@ type ICreateUserDB = {
   favorites: IMusic[];
 };
 
-export { ICreateUserDB };
+type IPlaylist = {
+  id: string;
+  creator: {
+    id: string;
+    name: string;
+  };
+  name: string;
+  imageBanner: string;
+  musics: IMusic[];
+};
+
+export { ICreateUserDB, IPlaylist };

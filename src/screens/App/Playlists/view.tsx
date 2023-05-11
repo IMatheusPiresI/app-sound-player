@@ -19,6 +19,7 @@ const PlaylistsView: React.FC<IViewProps> = ({
   rAnimatedHideSearch,
   rAnimatedNewPlaylist,
   showModalCreatePlaylist,
+  playlists,
   handleShowModalCreatePlaylist,
   handleCloseModalCreatePlaylist,
   scrollHandler,
@@ -70,30 +71,13 @@ const PlaylistsView: React.FC<IViewProps> = ({
             </Box>
           </Box>
           <Animated.FlatList
-            data={[
-              '1',
-              '2',
-              '3',
-              '4',
-              '5',
-              '6',
-              '7',
-              '8',
-              '9',
-              '10',
-              '11',
-              '12',
-              '13',
-              '14',
-              '15',
-              '16',
-            ]}
+            data={playlists}
             onScroll={scrollHandler}
-            keyExtractor={(item) => item}
+            keyExtractor={(item) => item.id}
             columnWrapperStyle={styles.columnWrapper}
             numColumns={2}
             contentContainerStyle={styles.contentContainerList}
-            renderItem={() => <CardPlaylist />}
+            renderItem={({ item }) => <CardPlaylist playlist={item} />}
             overScrollMode={'never'}
             bounces={false}
           />

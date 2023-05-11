@@ -19,7 +19,7 @@ import metrics from '@resources/theme/metrics';
 import { IProps, IViewProps } from './types';
 import View from './view';
 
-export const CardMusicList: React.FC<IProps> = ({ music }) => {
+export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   const cardAnimate = useSharedValue(0);
   const { user, removeMusicToFavorites } = useUserStore((state) => state);
   const { playlistType, changePlayList } = usePlaylistStore((state) => state);

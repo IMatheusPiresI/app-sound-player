@@ -24,8 +24,10 @@ type IViewProps = {
     opacity: number;
     left: number;
   };
+  loading: boolean;
   selectedMusics: IMusic[];
   handleNextStep: () => void;
+  handleCreatePlaylist: () => void;
   handleToogleSelectMusic: (music: IMusic) => void;
   setPlaylistName: React.Dispatch<React.SetStateAction<string>>;
   handleCloseModal: () => void;

@@ -1,5 +1,7 @@
-type IProps = {};
+import { IPlaylist } from '@services/firebase/collections/users/types';
 
-type IViewProps = {};
+type IProps = { playlist: IPlaylist };
+
+type IViewProps = { playlist: IPlaylist; handleGoToPlaylist: () => void };
 
 export { IProps, IViewProps };

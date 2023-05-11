@@ -20,6 +20,7 @@ const ButtonView: React.FC<IViewProps> = ({
       variant === 'black80' && styles.variantBlack80,
       disabled && styles.buttonDisabled,
     ]}
+    disabled={disabled}
     {...rest}
   >
     {isLoading ? (

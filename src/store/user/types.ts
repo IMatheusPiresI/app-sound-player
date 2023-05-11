@@ -1,4 +1,5 @@
 import { IMusic } from '@components/CarouselMusic/types';
+import { IPlaylist } from '@services/firebase/collections/users/types';
 
 type IUser = {
   name: string;
@@ -6,12 +7,14 @@ type IUser = {
   id: string;
   photoURL: string;
   favorites: IMusic[];
+  playlists: IPlaylist[];
 };
 type IUserState = {
   user: IUser;
   setUser: (user: IUser) => void;
   addMusicToFavorites: (music: IMusic) => void;
   removeMusicToFavorites: (music: IMusic) => void;
+  userAddPlaylist: (playlist: IPlaylist) => void;
 };
 
 export { IUserState, IUser };

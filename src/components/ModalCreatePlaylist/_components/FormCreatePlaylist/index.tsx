@@ -16,10 +16,11 @@ export const FormCreatePlaylist: React.FC<IProps> = ({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsMultipleSelection: false,
       quality: 1,
+      base64: true,
     });
 
     if (result.assets) {
-      setImagePlaylist(result.assets[0].uri);
+      setImagePlaylist(`data:image/png;base64,${result.assets[0].base64!}`);
     }
   };
 
