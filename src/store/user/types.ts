@@ -15,6 +15,7 @@ type IUserState = {
   addMusicToFavorites: (music: IMusic) => void;
   removeMusicToFavorites: (music: IMusic) => void;
   userAddPlaylist: (playlist: IPlaylist) => void;
+  userAddMusicPlaylist: (playlistID: string, musics: IMusic[]) => void;
 };
 
 export { IUserState, IUser };

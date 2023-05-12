@@ -13,7 +13,7 @@ export const ModalAddMusicsPlaylist: React.FC<IProps> = ({
   playlist,
   handleClose,
 }) => {
-  const { user } = useUserStore();
+  const { userAddMusicPlaylist } = useUserStore();
   const { allMusics } = useMusicStore();
   const [selectedMusics, setSelectedMusics] = useState<IMusic[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,6 +36,8 @@ export const ModalAddMusicsPlaylist: React.FC<IProps> = ({
         playlist,
         musics: selectedMusics,
       });
+      userAddMusicPlaylist(playlist.id, selectedMusics);
+      handleClose();
     } catch (err) {
       console.log(err);
     } finally {

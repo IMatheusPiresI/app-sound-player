@@ -5,7 +5,7 @@ import { InputSearch } from '@components/Form/InputSearch';
 import { CardMusicSelect } from '@components/CardMusicSelect';
 import { IMusic } from '@components/CarouselMusic/types';
 
-import { Box, FlatList, Text, VStack } from 'native-base';
+import { Box, FlatList, Text, VStack, View } from 'native-base';
 
 import { IViewProps } from './types';
 
@@ -13,6 +13,7 @@ const SelectMusicsPlaylistView: React.FC<IViewProps> = ({
   allMusics,
   selectedMusics,
   filteredMusics,
+
   search,
   setSearch,
   toggleSelectMusic,
@@ -61,6 +62,11 @@ const SelectMusicsPlaylistView: React.FC<IViewProps> = ({
             renderItem={renderItem}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.contentList}
+            ListEmptyComponent={() => (
+              <View mt="30" alignItems={'center'}>
+                <Text color={'white'}>Not exists musics to add.</Text>
+              </View>
+            )}
           />
         )}
       </VStack>

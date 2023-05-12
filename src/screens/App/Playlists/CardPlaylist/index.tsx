@@ -10,7 +10,7 @@ export const CardPlaylist: React.FC<IProps> = ({ playlist }) => {
 
   const handleGoToPlaylist = () => {
     navigation.navigate('Playlist', {
-      playlist,
+      playlistID: playlist.id,
     });
   };
   const viewProps: IViewProps = { playlist, handleGoToPlaylist };

@@ -15,6 +15,7 @@ import { IViewProps } from './types';
 const PlaylistView: React.FC<IViewProps> = ({
   playlist,
   showModalAddMusic,
+  handlePlayPlaylist,
   handleGoBack,
   handleCloseModalAddMusic,
   handleOpenModalAddMusic,
@@ -46,8 +47,8 @@ const PlaylistView: React.FC<IViewProps> = ({
               h={'40'}
             />
           </Box>
-          <HStack w="full" px="6" mt="2">
-            <Box w="full">
+          <HStack w="full" px="6" mt="2" alignItems={'center'}>
+            <Box flex={1}>
               <Text color="white" fontSize={16} numberOfLines={1}>
                 {playlist.name}
               </Text>
@@ -66,6 +67,25 @@ const PlaylistView: React.FC<IViewProps> = ({
                 </Text>
               </HStack>
             </Box>
+            <TouchableOpacity activeOpacity={0.6} onPress={handlePlayPlaylist}>
+              <Box
+                w="14"
+                h="14"
+                borderRadius={'full'}
+                borderWidth={1}
+                borderColor={'white'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                overflow={'hidden'}
+              >
+                <LinearGradient
+                  colors={['#fff8', '#fff8', '#000']}
+                  style={styles.gradientPlay}
+                >
+                  <MaterialIcons name="play-arrow" size={40} color="white" />
+                </LinearGradient>
+              </Box>
+            </TouchableOpacity>
           </HStack>
           <VStack flex={1} mt="2">
             <FlatList
@@ -119,5 +139,12 @@ const styles = StyleSheet.create({
   },
   contentContainerList: {
     gap: 1,
+  },
+
+  gradientPlay: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

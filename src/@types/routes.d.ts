@@ -1,5 +1,4 @@
 import { IMusic } from '@components/CarouselMusic/types';
-import { IPlaylist } from '@services/firebase/collections/users/types';
 
 export declare global {
   namespace ReactNavigation {
@@ -7,7 +6,7 @@ export declare global {
       TabRoutes: undefined;
       AppRoutes: undefined;
       Music: { music: IMusic };
-      Playlist: { playlist: IPlaylist };
+      Playlist: { playlistID: string };
       Home: undefined;
       Favorites: undefined;
       Album: undefined;

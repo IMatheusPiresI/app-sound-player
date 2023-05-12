@@ -38,4 +38,25 @@ export const useUserStore = create<IUserState>((set) => ({
         playlists: [...state.user.playlists, playlist],
       },
     })),
+  userAddMusicPlaylist: (playlistID, musics) =>
+    set((state) => {
+      const playlists = state.user.playlists.map((pl) => {
+        if (pl.id === playlistID) {
+          const playlistMusics = [...pl.musics, ...musics];
+
+          return {
+            ...pl,
+            musics: playlistMusics,
+          };
+        }
+        return pl;
+      });
+
+      return {
+        user: {
+          ...state.user,
+          playlists,
+        },
+      };
+    }),
 }));

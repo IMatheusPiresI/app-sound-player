@@ -56,7 +56,7 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
     try {
       await playlistRef.set(playlist);
       userAddPlaylist(playlist);
-      navigation.navigate('Playlist', { playlist });
+      navigation.navigate('Playlist', { playlistID: playlist.id });
     } catch (err) {
       console.log(err);
     } finally {
