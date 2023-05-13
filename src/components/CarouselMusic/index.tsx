@@ -18,19 +18,22 @@ import View from './view';
 import { IMusic, IProps, IViewProps } from './types';
 export const CarouselMusic: React.FC<IProps> = ({}) => {
   const { allMusics } = useMusicStore((state) => state);
-  const { playlistType, changePlayList } = usePlaylistStore((state) => state);
+  const { playlistId, changePlayList, changePlaylistId } = usePlaylistStore(
+    (state) => state,
+  );
   const navigation = useNavigation();
   const translateX = useSharedValue(0);
   const spacing = 40.200000000000045;
   const playbackState = usePlaybackState();
 
   const handleGoToMusic = async (music: IMusic) => {
-    if (playlistType !== 'AllMusics') {
-      changePlayList(allMusics);
+    if (playbackState !== State.None && playlistId !== 'AllMusics') {
+      await TrackPlayer.reset();
     }
 
-    if (playbackState !== State.None && playlistType !== 'AllMusics') {
-      await TrackPlayer.reset();
+    if (playlistId !== 'AllMusics') {
+      changePlayList(allMusics);
+      changePlaylistId('AllMusics');
     }
 
     navigation.navigate('Music', { music });

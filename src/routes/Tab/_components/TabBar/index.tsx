@@ -10,6 +10,7 @@ import { useCallback, useEffect } from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AudioMiniPlayer } from '@components/AudioMiniPlayer';
+import { logout } from '@services/firebase/auth';
 
 import { Box, HStack } from 'native-base';
 
@@ -68,6 +69,10 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
               });
 
               if (!isFocused && !event.defaultPrevented) {
+                if (route.name === 'Profile') {
+                  logout();
+                  return;
+                }
                 // The `merge: true` option makes sure that the params inside the tab screen are preserved
                 // navigate(route.name, { merge: true });
                 navigation.navigate(route.name, { merge: true });
@@ -85,7 +90,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
               Home: 'home',
               Favorites: 'favorite',
               Playlists: 'album',
-              Profile: 'person',
+              Profile: 'logout',
             };
 
             return (
@@ -101,7 +106,13 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
                   <MaterialIcons
                     name={iconName[route.name as IRouteNames]}
                     size={42}
-                    color={isFocused ? '#FFFFFF' : '#FFF5'}
+                    color={
+                      isFocused
+                        ? '#FFFFFF'
+                        : route.name === 'Profile'
+                        ? '#ff4141'
+                        : '#FFF5'
+                    }
                     style={isFocused && styles.iconShadow}
                   />
                 </Box>

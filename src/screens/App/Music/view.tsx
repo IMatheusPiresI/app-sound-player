@@ -38,7 +38,7 @@ const MusicView: React.FC<IViewProps> = ({
           style={styles.shadow}
         >
           <Image
-            source={{ uri: currentSong.imageBanner }}
+            source={{ uri: currentSong?.imageBanner }}
             alt="music"
             borderRadius={'3xl'}
             w={'full'}
@@ -56,7 +56,7 @@ const MusicView: React.FC<IViewProps> = ({
             flex={1}
             bgColor={'red.200'}
           >
-            {currentSong.musicName}
+            {currentSong?.musicName}
           </Text>
           <TouchableOpacity onPress={handleToogleFavorite}>
             <MaterialIcons
@@ -73,7 +73,7 @@ const MusicView: React.FC<IViewProps> = ({
           mt="2"
           numberOfLines={1}
         >
-          {currentSong.creator}
+          {currentSong?.creator}
         </Text>
       </VStack>
       <Box px="12" flex={1}>

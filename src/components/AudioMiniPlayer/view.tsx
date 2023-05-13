@@ -11,7 +11,7 @@ import { Slider } from './_components/Slider';
 const AudioMiniPlayerView: React.FC<IViewProps> = ({
   trackState,
   currentSong,
-  handleNaviteToMusic,
+  handleNavigateToMusic,
   handleTogglePlaySong,
   handleCloseMiniPlayerAndStopMusic,
 }) => {
@@ -27,7 +27,7 @@ const AudioMiniPlayerView: React.FC<IViewProps> = ({
 
     return (
       <Box w="full" alignItems="center" px="2">
-        <TouchableOpacity activeOpacity={0.8} onPress={handleNaviteToMusic}>
+        <TouchableOpacity activeOpacity={0.8} onPress={handleNavigateToMusic}>
           <HStack
             w={'full'}
             h="16"

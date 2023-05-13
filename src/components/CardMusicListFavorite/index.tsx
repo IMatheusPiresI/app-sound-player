@@ -22,7 +22,9 @@ import View from './view';
 export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   const cardAnimate = useSharedValue(0);
   const { user, removeMusicToFavorites } = useUserStore((state) => state);
-  const { playlistType, changePlayList } = usePlaylistStore((state) => state);
+  const { playlistId, changePlayList, changePlaylistId } = usePlaylistStore(
+    (state) => state,
+  );
   const navigation = useNavigation();
   const playbackState = usePlaybackState();
 
@@ -47,12 +49,18 @@ export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   };
 
   const handlePlayMusicToFavorites = async () => {
-    if (playlistType !== 'Favorites' && playbackState !== State.None) {
-      await TrackPlayer.reset();
-    }
-    if (playlistType !== 'Favorites') {
+    if (playlistId !== 'Favorites') {
       changePlayList(user.favorites);
+      changePlaylistId('Favorites');
     }
+    if (playlistId !== 'Favorites' && playbackState !== State.None) {
+      await TrackPlayer.reset();
+      navigation.navigate('Music', {
+        music,
+      });
+      return;
+    }
+
     navigation.navigate('Music', {
       music,
     });

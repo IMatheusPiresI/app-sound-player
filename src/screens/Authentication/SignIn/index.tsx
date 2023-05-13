@@ -6,6 +6,7 @@ import { getAllMusics } from '@services/firebase/collections/musics';
 import { useMusicStore } from '@store/musics';
 import { loginWithEmailAndPassword } from '@services/firebase/auth';
 import { useUserStore } from '@store/user';
+import { getAllPlaylists } from '@services/firebase/collections/playlist';
 
 import { signInSchema } from './schemas';
 import { ISignInForm, IViewProps } from './types';
@@ -55,7 +56,15 @@ const SignIn: React.FC = () => {
         console.log('user Not Found');
         return;
       }
-      setUser(user);
+      const playlists = await getAllPlaylists();
+      const userPlaylists = playlists.filter(
+        (playlist) => playlist.creator.id === user.id,
+      );
+
+      setUser({
+        ...user,
+        playlists: userPlaylists,
+      });
       await startApp();
     } catch (err) {
       setLoading(false);

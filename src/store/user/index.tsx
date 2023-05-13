@@ -59,4 +59,11 @@ export const useUserStore = create<IUserState>((set) => ({
         },
       };
     }),
+  userRemovePlaylist: (playlistID) =>
+    set((state) => ({
+      user: {
+        ...state.user,
+        playlists: state.user.playlists.filter((pl) => pl.id !== playlistID),
+      },
+    })),
 }));

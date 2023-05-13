@@ -14,82 +14,122 @@ import { Box, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 import { CardPlaylist } from './CardPlaylist';
+import { EmptyFavorite } from '../Favorites/_components/EmptyFavorites';
 
 const PlaylistsView: React.FC<IViewProps> = ({
   rAnimatedHideSearch,
   rAnimatedNewPlaylist,
   showModalCreatePlaylist,
   playlists,
+  playlistsFiltered,
+  search,
+  setSearch,
   handleShowModalCreatePlaylist,
   handleCloseModalCreatePlaylist,
   scrollHandler,
-}) => (
-  <KeyboardDismiss>
-    <>
-      <LinearGradient
-        colors={['#262c2c', '#171414', '#262c2c']}
-        style={styles.container}
+}) => {
+  const renderButtonCreatePlaylist = () => (
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={handleShowModalCreatePlaylist}
+    >
+      <Box
+        w="14"
+        h="10"
+        ml="4"
+        borderRadius={6}
+        borderWidth={1}
+        borderColor={'white'}
+        alignItems={'center'}
+        justifyContent={'center'}
+        bgColor={'#fff3'}
       >
-        <VStack flex={1} pt="statusBarHeight">
-          <Header textMid="Playlists" iconMid="album" />
-          <Box zIndex={99}>
-            <Box w="full">
-              <Box
-                w="full"
-                px="screenWidth5"
-                mt="0"
-                mb="4"
-                position={'absolute'}
-                flexDir={'row'}
-              >
-                <Animated.View
-                  style={[[rAnimatedHideSearch, styles.container]]}
-                >
-                  <InputSearch />
-                </Animated.View>
-                <Animated.View style={rAnimatedNewPlaylist}>
-                  <TouchableOpacity
-                    activeOpacity={0.8}
-                    onPress={handleShowModalCreatePlaylist}
-                  >
-                    <Box
-                      w="14"
-                      h="10"
-                      ml="4"
-                      borderRadius={6}
-                      borderWidth={1}
-                      borderColor={'white'}
-                      alignItems={'center'}
-                      justifyContent={'center'}
-                      bgColor={'#fff3'}
-                    >
-                      <MaterialIcons name="add" size={24} color="#fff" />
-                    </Box>
-                  </TouchableOpacity>
-                </Animated.View>
-              </Box>
+        <MaterialIcons name="add" size={24} color="#fff" />
+      </Box>
+    </TouchableOpacity>
+  );
+  return (
+    <KeyboardDismiss>
+      <>
+        <LinearGradient
+          colors={['#262c2c', '#171414', '#262c2c']}
+          style={styles.container}
+        >
+          <VStack flex={1} pt="statusBarHeight">
+            <Box>
+              <Header textMid="Playlists" iconMid="album" />
+              {playlists.length === 0 && (
+                <Box position={'absolute'} bottom={2} right={5}>
+                  {renderButtonCreatePlaylist()}
+                </Box>
+              )}
             </Box>
-          </Box>
-          <Animated.FlatList
-            data={playlists}
-            onScroll={scrollHandler}
-            keyExtractor={(item) => item.id}
-            columnWrapperStyle={styles.columnWrapper}
-            numColumns={2}
-            contentContainerStyle={styles.contentContainerList}
-            renderItem={({ item }) => <CardPlaylist playlist={item} />}
-            overScrollMode={'never'}
-            bounces={false}
-          />
-        </VStack>
-        <ModalCreatePlaylist
-          isVisible={showModalCreatePlaylist}
-          handleClose={handleCloseModalCreatePlaylist}
-        />
-      </LinearGradient>
-    </>
-  </KeyboardDismiss>
-);
+            {playlists.length > 0 ? (
+              <>
+                <Box zIndex={99}>
+                  <Box w="full">
+                    <Box
+                      w="full"
+                      px="screenWidth5"
+                      mt="0"
+                      mb="4"
+                      position={'absolute'}
+                      flexDir={'row'}
+                    >
+                      <Animated.View
+                        style={[[rAnimatedHideSearch, styles.container]]}
+                      >
+                        <InputSearch value={search} onChangeText={setSearch} />
+                      </Animated.View>
+                      <Animated.View style={rAnimatedNewPlaylist}>
+                        {renderButtonCreatePlaylist()}
+                      </Animated.View>
+                    </Box>
+                  </Box>
+                </Box>
+                {search.length > 0 ? (
+                  <Animated.FlatList
+                    data={playlistsFiltered}
+                    onScroll={scrollHandler}
+                    keyExtractor={(item) => item.id}
+                    columnWrapperStyle={styles.columnWrapper}
+                    numColumns={2}
+                    contentContainerStyle={styles.contentContainerList}
+                    renderItem={({ item }) => <CardPlaylist playlist={item} />}
+                    overScrollMode={'never'}
+                    bounces={false}
+                  />
+                ) : (
+                  <Animated.FlatList
+                    data={playlists}
+                    onScroll={scrollHandler}
+                    keyExtractor={(item) => item.id}
+                    columnWrapperStyle={styles.columnWrapper}
+                    numColumns={2}
+                    contentContainerStyle={styles.contentContainerList}
+                    renderItem={({ item }) => <CardPlaylist playlist={item} />}
+                    overScrollMode={'never'}
+                    bounces={false}
+                  />
+                )}
+              </>
+            ) : (
+              <EmptyFavorite
+                title={`Not Playlists created! Click on +${'\n'}button for create.`}
+              />
+            )}
+          </VStack>
+          {showModalCreatePlaylist && (
+            <ModalCreatePlaylist
+              isVisible={showModalCreatePlaylist}
+              handleClose={handleCloseModalCreatePlaylist}
+            />
+          )}
+        </LinearGradient>
+      </>
+    </KeyboardDismiss>
+  );
+};
 
 export default PlaylistsView;
 

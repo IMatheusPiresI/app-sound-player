@@ -51,6 +51,18 @@ const observableUserAuth = ({
   setInitializing,
 }: IObservableCheck) => {
   auth().onAuthStateChanged(async (sessionUser) => {
+    if (!sessionUser) {
+      useUserStore.setState({
+        user: {
+          email: '',
+          id: '',
+          name: '',
+          photoURL: '',
+          favorites: [],
+          playlists: [],
+        },
+      });
+    }
     if (sessionUser && initializing && !useUserStore.getState().user.email) {
       const userRecovered = await getUserById(sessionUser.uid);
       const playlists = await getAllPlaylists();
@@ -80,8 +92,13 @@ const observableUserAuth = ({
   });
 };
 
+const logout = async () => {
+  await auth().signOut();
+};
+
 export {
   registerWithEmailAndPassword,
   loginWithEmailAndPassword,
   observableUserAuth,
+  logout,
 };

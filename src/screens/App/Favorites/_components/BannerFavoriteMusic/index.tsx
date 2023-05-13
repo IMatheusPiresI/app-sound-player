@@ -21,7 +21,7 @@ export const BannerFavoriteMusic: React.FC<IProps> = ({ scrollAnimate }) => {
   const playbackState = usePlaybackState();
   const navigation = useNavigation();
   const { user } = useUserStore();
-  const { playlistType, changePlayList } = usePlaylistStore();
+  const { playlistId, changePlayList, changePlaylistId } = usePlaylistStore();
 
   const randomSong = useMemo(() => {
     const totalFavorites = user.favorites.length;
@@ -32,11 +32,12 @@ export const BannerFavoriteMusic: React.FC<IProps> = ({ scrollAnimate }) => {
   }, [user.favorites]);
 
   const handlePlayMusicToFavorites = async () => {
-    if (playlistType !== 'Favorites' && playbackState !== State.None) {
+    if (playlistId !== 'Favorites' && playbackState !== State.None) {
       await TrackPlayer.reset();
     }
-    if (playlistType !== 'Favorites') {
+    if (playlistId !== 'Favorites') {
       changePlayList(user.favorites);
+      changePlaylistId('Favorites');
     }
     navigation.navigate('Music', {
       music: randomSong,

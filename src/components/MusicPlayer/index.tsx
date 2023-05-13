@@ -20,7 +20,6 @@ export const MusicPlayer: React.FC<IProps> = ({
   const { currentPlaylist } = usePlaylistStore((state) => state);
   const playerState = usePlaybackState();
   const isNotRunning = playerState === State.None;
-  const selectedSong = idMusicSelected;
 
   const setupCurentSongAndOptions = useCallback(async () => {
     await TrackPlayer.updateOptions({
@@ -31,10 +30,11 @@ export const MusicPlayer: React.FC<IProps> = ({
         Capability.SkipToPrevious,
       ],
     });
+
     await TrackPlayer.add(playList);
-    await TrackPlayer.skip(selectedSong);
+    await TrackPlayer.skip(idMusicSelected);
     await TrackPlayer.play();
-  }, [playList, selectedSong]);
+  }, [playList, idMusicSelected]);
 
   const setupTrackPlayer = useCallback(async () => {
     try {
@@ -43,21 +43,23 @@ export const MusicPlayer: React.FC<IProps> = ({
       await setupCurentSongAndOptions();
     } catch (err) {
       const trackIndex = await TrackPlayer.getCurrentTrack();
-      if (trackIndex === null) {
+      const currentTrack = await TrackPlayer.getTrack(trackIndex!);
+      if (currentTrack === null) {
         await setupCurentSongAndOptions();
         return;
       }
-      if (selectedSong !== trackIndex) {
-        await TrackPlayer.skip(selectedSong);
+      if (idMusicSelected !== trackIndex) {
+        await TrackPlayer.skip(idMusicSelected);
       }
       await TrackPlayer.play();
     }
-  }, [isNotRunning, selectedSong, setupCurentSongAndOptions]);
+  }, [isNotRunning, idMusicSelected, setupCurentSongAndOptions]);
 
   const handleGoNextSong = async () => {
     try {
       await TrackPlayer.skipToNext();
     } catch (err) {
+      console.log('asdsadadad');
       await TrackPlayer.skip(0);
       setMusicId(0);
     }
@@ -65,12 +67,18 @@ export const MusicPlayer: React.FC<IProps> = ({
 
   const handleGoPrevSong = async () => {
     try {
-      await TrackPlayer.skipToPrevious();
-      setMusicId((prevState) => prevState - 1);
-    } catch {
+      const currentIndexTrack = await TrackPlayer.getCurrentTrack();
+
+      if (currentIndexTrack && currentIndexTrack !== 0) {
+        await TrackPlayer.skip(currentIndexTrack - 1);
+        setMusicId((prevState) => prevState - 1);
+        return;
+      }
       const musicTotalLenght = currentPlaylist.length;
       await TrackPlayer.skip(musicTotalLenght - 1);
       setMusicId(musicTotalLenght - 1);
+    } catch (err) {
+      console.log('Error on return to prev song');
     }
   };
 
@@ -91,6 +99,7 @@ export const MusicPlayer: React.FC<IProps> = ({
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack != null) {
       if (event.position !== 0) {
         const track = (await TrackPlayer.getTrack(event.nextTrack)) as ITrack;
+        if (!track) return;
         const indexTrack = currentPlaylist.findIndex(
           (music) => music.id === track.id,
         );

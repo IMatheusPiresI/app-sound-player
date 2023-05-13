@@ -8,7 +8,7 @@ type IViewProps = {
   trackState: State;
   currentSong: IMusic | undefined;
   handleTogglePlaySong: () => void;
-  handleNaviteToMusic: () => void;
+  handleNavigateToMusic: () => void;
   handleCloseMiniPlayerAndStopMusic: () => void;
 };
 

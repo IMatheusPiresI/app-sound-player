@@ -45,4 +45,18 @@ const addMusicsToPlaylist = async ({
     .catch((err) => console.log(err));
 };
 
-export { addMusicsToPlaylist, getAllPlaylists };
+const createPlaylist = async (playlist: IPlaylist) => {
+  await playlistCollectionRef.doc().set(playlist);
+};
+
+const deletePlaylist = async (playlistId: string) => {
+  const querySnapshot = await playlistCollectionRef
+    .where('id', '==', playlistId)
+    .get();
+
+  if (!querySnapshot.empty) {
+    await playlistCollectionRef.doc(querySnapshot.docs[0].id).delete();
+  }
+};
+
+export { addMusicsToPlaylist, getAllPlaylists, createPlaylist, deletePlaylist };

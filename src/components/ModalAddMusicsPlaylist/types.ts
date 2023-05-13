@@ -4,6 +4,7 @@ import { IPlaylist } from '@services/firebase/collections/users/types';
 type IProps = {
   isVisible: boolean;
   handleClose: () => void;
+  handleAttMusicsLocal: (musics: IMusic[]) => void;
   playlist: IPlaylist;
 };
 

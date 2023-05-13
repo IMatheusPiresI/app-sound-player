@@ -4,16 +4,15 @@ import {
   interpolate,
   useAnimatedStyle,
   useSharedValue,
-  withDelay,
   withTiming,
 } from 'react-native-reanimated';
 import uuid from 'react-native-uuid';
 
 import { IMusic } from '@components/CarouselMusic/types';
-import { firebase } from '@react-native-firebase/firestore';
 import { useUserStore } from '@store/user';
 import { IPlaylist } from '@services/firebase/collections/users/types';
 import { useNavigation } from '@react-navigation/native';
+import { createPlaylist } from '@services/firebase/collections/playlist';
 
 import { IProps, IViewProps } from './types';
 import View from './view';
@@ -32,16 +31,12 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleCloseModal = () => {
-    stepAnimate.value = withDelay(800, withTiming(0, { duration: 0 }));
-    setCurrentStep(0);
-    setSelectedMusics([]);
-    setPlaylistName('');
     handleClose();
   };
 
   const handleCreatePlaylist = async () => {
     setLoading(true);
-    const playlistRef = firebase.firestore().collection('playlist').doc();
+
     const playlist: IPlaylist = {
       id: String(uuid.v4()),
       creator: {
@@ -54,9 +49,10 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
     };
 
     try {
-      await playlistRef.set(playlist);
+      await createPlaylist(playlist);
+      navigation.navigate('Playlist', { playlist });
       userAddPlaylist(playlist);
-      navigation.navigate('Playlist', { playlistID: playlist.id });
+      handleCloseModal();
     } catch (err) {
       console.log(err);
     } finally {
@@ -91,6 +87,7 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
   }, [currentStep, playlistName]);
 
   const handleNextStep = () => {
+    console.log(currentStep);
     if (currentStep === 0) {
       stepAnimate.value = withTiming(1, { duration: 400 });
       setCurrentStep((prevState) => prevState + 1);

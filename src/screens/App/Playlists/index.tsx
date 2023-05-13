@@ -13,12 +13,17 @@ import { IViewProps } from './types';
 import View from './view';
 
 const Playlists: React.FC = () => {
+  const scrollAnimate = useSharedValue(0);
   const {
     user: { playlists },
   } = useUserStore();
   const [showModalCreatePlaylist, setShowModalCreatePlaylist] =
     useState<boolean>(false);
-  const scrollAnimate = useSharedValue(0);
+
+  const [search, setSearch] = useState<string>('');
+  const playlistsFiltered = playlists.filter((pl) =>
+    pl.name.toLowerCase().includes(search.toLowerCase()),
+  );
 
   const handleShowModalCreatePlaylist = () => {
     setShowModalCreatePlaylist(true);
@@ -72,6 +77,9 @@ const Playlists: React.FC = () => {
     rAnimatedNewPlaylist,
     showModalCreatePlaylist,
     playlists,
+    playlistsFiltered,
+    search,
+    setSearch,
     scrollHandler,
     handleShowModalCreatePlaylist,
     handleCloseModalCreatePlaylist,

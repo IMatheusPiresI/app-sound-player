@@ -7,21 +7,25 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { CardMusicListPlay } from '@components/CardMusicListPlay';
 import { IMusic } from '@components/CarouselMusic/types';
 import { ModalAddMusicsPlaylist } from '@components/ModalAddMusicsPlaylist';
+import { ModalLoading } from '@components/ModalLoading';
 
 import { Box, FlatList, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
 const PlaylistView: React.FC<IViewProps> = ({
-  playlist,
+  playlistOpen,
   showModalAddMusic,
+  loading,
+  handleAttMusicsLocal,
   handlePlayPlaylist,
+  handleDeletePlaylist,
   handleGoBack,
   handleCloseModalAddMusic,
   handleOpenModalAddMusic,
 }) => {
   const renderListItem = ({ item }: ListRenderItemInfo<IMusic>) => (
-    <CardMusicListPlay music={item} />
+    <CardMusicListPlay music={item} onPlay={handlePlayPlaylist} />
   );
 
   return (
@@ -34,13 +38,15 @@ const PlaylistView: React.FC<IViewProps> = ({
           textMid="Playlist"
           iconMid="album"
           iconLeft="chevron-left"
+          iconRight="delete"
           handleIconLeftPress={handleGoBack}
+          handleIconRightPress={handleDeletePlaylist}
         />
         <VStack flex={1}>
           <Box w="full" alignItems={'center'} mt="2">
             <Image
               source={{
-                uri: playlist.imageBanner,
+                uri: playlistOpen?.imageBanner,
               }}
               alt="selected image"
               w={'40'}
@@ -50,7 +56,7 @@ const PlaylistView: React.FC<IViewProps> = ({
           <HStack w="full" px="6" mt="2" alignItems={'center'}>
             <Box flex={1}>
               <Text color="white" fontSize={16} numberOfLines={1}>
-                {playlist.name}
+                {playlistOpen?.name}
               </Text>
               <HStack alignItems={'center'} mt="1">
                 <MaterialIcons name="person" size={16} color="white" />
@@ -61,9 +67,9 @@ const PlaylistView: React.FC<IViewProps> = ({
               <HStack alignItems={'center'} mt="1">
                 <MaterialIcons name="music-note" size={16} color="white" />
                 <Text color="white" fontSize={12} ml="1">
-                  {playlist?.musics?.length > 1
-                    ? playlist.musics.length + ' musics'
-                    : playlist.musics.length + ' music'}
+                  {playlistOpen?.musics?.length > 1
+                    ? playlistOpen?.musics?.length + ' musics'
+                    : playlistOpen?.musics?.length + ' music'}
                 </Text>
               </HStack>
             </Box>
@@ -89,7 +95,7 @@ const PlaylistView: React.FC<IViewProps> = ({
           </HStack>
           <VStack flex={1} mt="2">
             <FlatList
-              data={playlist.musics}
+              data={playlistOpen?.musics}
               keyExtractor={(item) => item.id}
               renderItem={renderListItem}
               showsVerticalScrollIndicator={false}
@@ -121,8 +127,10 @@ const PlaylistView: React.FC<IViewProps> = ({
         <ModalAddMusicsPlaylist
           isVisible={showModalAddMusic}
           handleClose={handleCloseModalAddMusic}
-          playlist={playlist}
+          playlist={playlistOpen}
+          handleAttMusicsLocal={handleAttMusicsLocal}
         />
+        {loading && <ModalLoading message="Deleting Playlist..." />}
       </VStack>
     </LinearGradient>
   );

@@ -7,6 +7,7 @@ import { useAuthStore } from '@store/auth';
 import { useUserStore } from '@store/user';
 import { getAllMusics } from '@services/firebase/collections/musics';
 import { useMusicStore } from '@store/musics';
+import { getAllPlaylists } from '@services/firebase/collections/playlist';
 
 import { signUpSchema } from './schemas';
 import { ISignUpForm, IViewProps } from './types';
@@ -49,7 +50,16 @@ const SignUp: React.FC = () => {
         password: values.password,
       });
       setCredentials(token);
-      setUser(user);
+
+      const playlists = await getAllPlaylists();
+      const userPlaylists = playlists.filter(
+        (playlist) => playlist.creator.id === user.id,
+      );
+
+      setUser({
+        ...user,
+        playlists: userPlaylists,
+      });
       await startApp();
     } catch (err) {
       setLoading(false);

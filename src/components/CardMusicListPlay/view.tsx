@@ -7,7 +7,7 @@ import { Box, HStack, Image, Text, VStack } from 'native-base';
 
 import { IViewProps } from './types';
 
-const CardMusicListPlayView: React.FC<IViewProps> = ({ music }) => (
+const CardMusicListPlayView: React.FC<IViewProps> = ({ music, onPlay }) => (
   <Box w="full" alignItems="center" h="16">
     <HStack
       w={'full'}
@@ -34,7 +34,7 @@ const CardMusicListPlayView: React.FC<IViewProps> = ({ music }) => (
         </Text>
       </VStack>
       <HStack alignItems={'center'}>
-        <TouchableOpacity activeOpacity={0.6} onPress={() => {}}>
+        <TouchableOpacity activeOpacity={0.6} onPress={() => onPlay(music)}>
           <MaterialIcons name="play-arrow" size={30} color="#fff" />
         </TouchableOpacity>
       </HStack>

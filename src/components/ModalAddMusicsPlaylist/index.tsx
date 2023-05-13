@@ -11,6 +11,7 @@ import View from './view';
 export const ModalAddMusicsPlaylist: React.FC<IProps> = ({
   isVisible,
   playlist,
+  handleAttMusicsLocal,
   handleClose,
 }) => {
   const { userAddMusicPlaylist } = useUserStore();
@@ -37,6 +38,7 @@ export const ModalAddMusicsPlaylist: React.FC<IProps> = ({
         musics: selectedMusics,
       });
       userAddMusicPlaylist(playlist.id, selectedMusics);
+      handleAttMusicsLocal(selectedMusics);
       handleClose();
     } catch (err) {
       console.log(err);

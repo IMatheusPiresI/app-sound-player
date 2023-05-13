@@ -15,7 +15,7 @@ export const AudioMiniPlayer: React.FC<IProps> = () => {
   const [currentSong, setCurrentSong] = useState<IMusic | undefined>(undefined);
   const navigation = useNavigation();
 
-  const handleNaviteToMusic = () => {
+  const handleNavigateToMusic = () => {
     if (!currentSong) return;
     navigation.navigate('Music', { music: currentSong });
   };
@@ -50,7 +50,7 @@ export const AudioMiniPlayer: React.FC<IProps> = () => {
   const viewProps: IViewProps = {
     trackState,
     currentSong,
-    handleNaviteToMusic,
+    handleNavigateToMusic,
     handleTogglePlaySong,
     handleCloseMiniPlayerAndStopMusic,
   };

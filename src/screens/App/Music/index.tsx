@@ -35,7 +35,8 @@ const Music: React.FC = () => {
   };
 
   const currentSong = useMemo(() => {
-    const currentMusic = currentPlaylist[musicId];
+    const idMusic = musicId >= 0 ? musicId : currentPlaylist.length - 1;
+    const currentMusic = currentPlaylist[idMusic];
 
     return currentMusic!;
   }, [currentPlaylist, musicId]);
@@ -44,16 +45,17 @@ const Music: React.FC = () => {
     const musicIndex = currentPlaylist.findIndex(
       (findMusic) => findMusic.id === music.id,
     );
+
     return musicIndex;
   }, [currentPlaylist, music.id]);
 
   const isFavorited = useMemo(() => {
     const musicFavorited = user.favorites.find(
-      (musicFavorite) => musicFavorite.id === currentSong.id,
+      (musicFavorite) => musicFavorite.id === currentSong?.id,
     );
 
     return !!musicFavorited;
-  }, [currentSong.id, user.favorites]);
+  }, [currentSong?.id, user.favorites]);
 
   const handleAddMusicToFavorite = async () => {
     try {
@@ -104,6 +106,7 @@ const Music: React.FC = () => {
     selectedMusicId,
     playList: currentPlaylist,
   };
+
   return createElement(View, viewProps);
 };
 

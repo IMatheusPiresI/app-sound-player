@@ -16,6 +16,9 @@ type IViewProps = {
   };
   showModalCreatePlaylist: boolean;
   playlists: IPlaylist[];
+  playlistsFiltered: IPlaylist[];
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
   scrollHandler: (event: NativeSyntheticEvent<NativeScrollEvent>) => void;
   handleShowModalCreatePlaylist: () => void;
   handleCloseModalCreatePlaylist: () => void;
