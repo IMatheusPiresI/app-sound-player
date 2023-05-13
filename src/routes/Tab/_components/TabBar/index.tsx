@@ -89,7 +89,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
             const iconName: IIconName = {
               Home: 'home',
               Favorites: 'favorite',
-              Playlists: 'album',
+              Playlists: 'playlist-play',
               Profile: 'logout',
             };
 
@@ -108,7 +108,7 @@ export function MyTabBar({ state, navigation }: BottomTabBarProps) {
                     size={42}
                     color={
                       isFocused
-                        ? '#FFFFFF'
+                        ? '#ffffff'
                         : route.name === 'Profile'
                         ? '#ff4141'
                         : '#FFF5'

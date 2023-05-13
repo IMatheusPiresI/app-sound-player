@@ -57,7 +57,7 @@ const PlaylistsView: React.FC<IViewProps> = ({
         >
           <VStack flex={1} pt="statusBarHeight">
             <Box>
-              <Header textMid="Playlists" iconMid="album" />
+              <Header textMid="Playlists" iconMid="playlist-play" />
               {playlists.length === 0 && (
                 <Box position={'absolute'} bottom={2} right={5}>
                   {renderButtonCreatePlaylist()}

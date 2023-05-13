@@ -42,7 +42,7 @@ const PlaylistView: React.FC<IViewProps> = ({
       <VStack flex={1} pt="statusBarHeight">
         <Header
           textMid="Playlist"
-          iconMid="album"
+          iconMid="playlist-play"
           iconLeft="chevron-left"
           iconRight="delete"
           handleIconLeftPress={handleGoBack}
