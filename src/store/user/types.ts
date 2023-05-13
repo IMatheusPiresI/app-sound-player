@@ -16,6 +16,7 @@ type IUserState = {
   removeMusicToFavorites: (music: IMusic) => void;
   userAddPlaylist: (playlist: IPlaylist) => void;
   userAddMusicPlaylist: (playlistID: string, musics: IMusic[]) => void;
+  userRemoveMusicPlaylist: (playlistID: string, music: IMusic) => void;
   userRemovePlaylist: (playlistID: string) => void;
 };
 

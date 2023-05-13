@@ -47,6 +47,14 @@ const Playlist: React.FC = () => {
     setPlaylistOpen(playlistWithNewMusics);
   };
 
+  const handleAttDeleteMusicLocal = (music: IMusic) => {
+    const playlistWithoutMusic: IPlaylist = {
+      ...playlistOpen,
+      musics: playlistOpen.musics.filter((msc) => msc.id !== music.id),
+    };
+    setPlaylistOpen(playlistWithoutMusic);
+  };
+
   const handlePlayPlaylist = async (music?: IMusic) => {
     if (playbackState !== State.None && playlistId !== playlistOpen.id) {
       await TrackPlayer.reset();
@@ -81,6 +89,7 @@ const Playlist: React.FC = () => {
     handlePlayPlaylist,
     handleCloseModalAddMusic,
     handleOpenModalAddMusic,
+    handleAttDeleteMusicLocal,
   };
 
   return createElement(View, viewProps);

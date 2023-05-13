@@ -7,4 +7,9 @@ type IAddRemoveMusicsToPlaylist = {
   musics: IMusic[];
 };
 
-export { IAddRemoveMusicsToPlaylist };
+type IRemoveMusicPlaylist = {
+  musicId: string;
+  playlistId: string;
+};
+
+export { IAddRemoveMusicsToPlaylist, IRemoveMusicPlaylist };

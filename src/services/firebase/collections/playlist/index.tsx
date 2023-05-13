@@ -1,6 +1,7 @@
 import { db } from '@services/firebase/collections';
+import { IMusic } from '@components/CarouselMusic/types';
 
-import { IAddRemoveMusicsToPlaylist } from './types';
+import { IAddRemoveMusicsToPlaylist, IRemoveMusicPlaylist } from './types';
 import { IPlaylist } from '../users/types';
 
 const COLLECTION_NAME = 'playlist';
@@ -45,6 +46,27 @@ const addMusicsToPlaylist = async ({
     .catch((err) => console.log(err));
 };
 
+const removeMusicToPlaylist = async ({
+  musicId,
+  playlistId,
+}: IRemoveMusicPlaylist) => {
+  await playlistCollectionRef
+    .where('id', '==', playlistId)
+    .get()
+    .then(async (res) => {
+      const playlistDoc = res.docs[0];
+      const playlistData = playlistDoc.data();
+      const playlistMusics = playlistData.musics.filter(
+        (music: IMusic) => music.id !== musicId,
+      );
+
+      await playlistDoc.ref.update({
+        musics: playlistMusics,
+      });
+    })
+    .catch((err) => console.log(err));
+};
+
 const createPlaylist = async (playlist: IPlaylist) => {
   await playlistCollectionRef.doc().set(playlist);
 };
@@ -59,4 +81,10 @@ const deletePlaylist = async (playlistId: string) => {
   }
 };
 
-export { addMusicsToPlaylist, getAllPlaylists, createPlaylist, deletePlaylist };
+export {
+  addMusicsToPlaylist,
+  getAllPlaylists,
+  createPlaylist,
+  deletePlaylist,
+  removeMusicToPlaylist,
+};

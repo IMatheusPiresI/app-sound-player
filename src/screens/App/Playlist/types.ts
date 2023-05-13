@@ -7,6 +7,7 @@ type IViewProps = {
   loading: boolean;
   handlePlayPlaylist: () => void;
   handleAttMusicsLocal: (musics: IMusic[]) => void;
+  handleAttDeleteMusicLocal: (musics: IMusic) => void;
   handleDeletePlaylist: () => void;
   handleCloseModalAddMusic: () => void;
   handleOpenModalAddMusic: () => void;

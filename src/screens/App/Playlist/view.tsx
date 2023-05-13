@@ -22,10 +22,16 @@ const PlaylistView: React.FC<IViewProps> = ({
   handleDeletePlaylist,
   handleGoBack,
   handleCloseModalAddMusic,
+  handleAttDeleteMusicLocal,
   handleOpenModalAddMusic,
 }) => {
   const renderListItem = ({ item }: ListRenderItemInfo<IMusic>) => (
-    <CardMusicListPlay music={item} onPlay={handlePlayPlaylist} />
+    <CardMusicListPlay
+      music={item}
+      onPlay={handlePlayPlaylist}
+      playlistId={playlistOpen.id}
+      onDelete={handleAttDeleteMusicLocal}
+    />
   );
 
   return (
