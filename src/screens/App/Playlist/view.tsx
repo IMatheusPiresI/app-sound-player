@@ -8,6 +8,7 @@ import { CardMusicListPlay } from '@components/CardMusicListPlay';
 import { IMusic } from '@components/CarouselMusic/types';
 import { ModalAddMusicsPlaylist } from '@components/ModalAddMusicsPlaylist';
 import { ModalLoading } from '@components/ModalLoading';
+import { ModalConfirmExclude } from '@components/ModalConfirmExclude';
 
 import { Box, FlatList, HStack, Image, Text, VStack } from 'native-base';
 
@@ -16,6 +17,7 @@ import { IViewProps } from './types';
 const PlaylistView: React.FC<IViewProps> = ({
   playlistOpen,
   showModalAddMusic,
+  showModalExclude,
   loading,
   handleAttMusicsLocal,
   handlePlayPlaylist,
@@ -24,6 +26,8 @@ const PlaylistView: React.FC<IViewProps> = ({
   handleCloseModalAddMusic,
   handleAttDeleteMusicLocal,
   handleOpenModalAddMusic,
+  handleCloseModalExclude,
+  handleShowModalExclude,
 }) => {
   const renderListItem = ({ item }: ListRenderItemInfo<IMusic>) => (
     <CardMusicListPlay
@@ -46,7 +50,7 @@ const PlaylistView: React.FC<IViewProps> = ({
           iconLeft="chevron-left"
           iconRight="delete"
           handleIconLeftPress={handleGoBack}
-          handleIconRightPress={handleDeletePlaylist}
+          handleIconRightPress={handleShowModalExclude}
         />
         <VStack flex={1}>
           <Box w="full" alignItems={'center'} mt="2">
@@ -135,6 +139,13 @@ const PlaylistView: React.FC<IViewProps> = ({
           handleClose={handleCloseModalAddMusic}
           playlist={playlistOpen}
           handleAttMusicsLocal={handleAttMusicsLocal}
+        />
+        <ModalConfirmExclude
+          title="Do you want to delete this playlist?"
+          message="Deleting this playlist will remove it from your listing and will not be recoverable."
+          cancelButtonCallback={handleCloseModalExclude}
+          confirmButtonCallback={handleDeletePlaylist}
+          isVisible={showModalExclude}
         />
         {loading && <ModalLoading message="Deleting Playlist..." />}
       </VStack>

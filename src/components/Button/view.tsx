@@ -18,6 +18,7 @@ const ButtonView: React.FC<IViewProps> = ({
       styles.button,
       small && styles.buttonSmall,
       variant === 'black80' && styles.variantBlack80,
+      variant === 'delete' && styles.variantDelete,
       disabled && styles.buttonDisabled,
     ]}
     disabled={disabled}
@@ -56,6 +57,9 @@ const styles = StyleSheet.create({
   },
   variantBlack80: {
     backgroundColor: '#0008',
+  },
+  variantDelete: {
+    backgroundColor: '#fa7979be',
   },
   buttonDisabled: {
     borderColor: '#fff6',

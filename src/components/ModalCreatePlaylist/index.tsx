@@ -87,7 +87,6 @@ export const ModalCreatePlaylist: React.FC<IProps> = ({
   }, [currentStep, playlistName]);
 
   const handleNextStep = () => {
-    console.log(currentStep);
     if (currentStep === 0) {
       stepAnimate.value = withTiming(1, { duration: 400 });
       setCurrentStep((prevState) => prevState + 1);

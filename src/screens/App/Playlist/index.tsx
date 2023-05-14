@@ -19,13 +19,23 @@ const Playlist: React.FC = () => {
   const { playlist } = route.params as { playlist: IPlaylist };
   const navigation = useNavigation();
   const [showModalAddMusic, setShowModalAddMusic] = useState<boolean>(false);
+  const [showModalExclude, setShowModalExclude] = useState<boolean>(false);
   const { changePlayList, playlistId, changePlaylistId } = usePlaylistStore();
   const { userRemovePlaylist } = useUserStore();
   const playbackState = usePlaybackState();
   const [loading, setLoading] = useState<boolean>(false);
   const [playlistOpen, setPlaylistOpen] = useState<IPlaylist>(playlist);
 
+  const handleShowModalExclude = () => {
+    setShowModalExclude(true);
+  };
+
+  const handleCloseModalExclude = () => {
+    setShowModalExclude(false);
+  };
+
   const handleDeletePlaylist = async () => {
+    handleCloseModalExclude();
     setLoading(true);
     try {
       await deletePlaylist(playlistOpen.id);
@@ -34,7 +44,6 @@ const Playlist: React.FC = () => {
       userRemovePlaylist(playlistOpen.id);
     } catch (err) {
       setLoading(false);
-    } finally {
     }
   };
 
@@ -81,6 +90,7 @@ const Playlist: React.FC = () => {
 
   const viewProps: IViewProps = {
     playlistOpen,
+    showModalExclude,
     showModalAddMusic,
     loading,
     handleGoBack,
@@ -90,6 +100,8 @@ const Playlist: React.FC = () => {
     handleCloseModalAddMusic,
     handleOpenModalAddMusic,
     handleAttDeleteMusicLocal,
+    handleShowModalExclude,
+    handleCloseModalExclude,
   };
 
   return createElement(View, viewProps);

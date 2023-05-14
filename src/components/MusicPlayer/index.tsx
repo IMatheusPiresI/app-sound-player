@@ -59,7 +59,6 @@ export const MusicPlayer: React.FC<IProps> = ({
     try {
       await TrackPlayer.skipToNext();
     } catch (err) {
-      console.log('asdsadadad');
       await TrackPlayer.skip(0);
       setMusicId(0);
     }

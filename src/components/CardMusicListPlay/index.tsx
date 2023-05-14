@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React, { createElement, useState } from 'react';
 import {
   interpolate,
   useAnimatedStyle,
@@ -8,7 +8,6 @@ import {
 
 import metrics from '@resources/theme/metrics';
 import { removeMusicToPlaylist } from '@services/firebase/collections/playlist';
-import { IMusic } from '@components/CarouselMusic/types';
 import { useUserStore } from '@store/user';
 
 import { IProps, IViewProps } from './types';
@@ -22,12 +21,23 @@ export const CardMusicListPlay: React.FC<IProps> = ({
 }) => {
   const cardAnimate = useSharedValue(0);
   const { userRemoveMusicPlaylist } = useUserStore();
-  const handleDeleteMusicPlaylist = async (musicRemove: IMusic) => {
+  const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
+
+  const handleShowModalExclude = () => {
+    setShowModalDelete(true);
+  };
+
+  const handleCloseModalExclude = () => {
+    setShowModalDelete(false);
+  };
+
+  const handleDeleteMusicPlaylist = async () => {
+    handleCloseModalExclude();
     cardAnimate.value = withTiming(1, { duration: 500 });
 
     try {
       await removeMusicToPlaylist({
-        musicId: musicRemove.id,
+        musicId: music.id,
         playlistId,
       });
 
@@ -55,8 +65,11 @@ export const CardMusicListPlay: React.FC<IProps> = ({
   const viewProps: IViewProps = {
     music,
     rAnimatedRemoveFavorite,
+    showModalDelete,
     onPlay,
     handleDeleteMusicPlaylist,
+    handleShowModalExclude,
+    handleCloseModalExclude,
   };
 
   return createElement(View, viewProps);

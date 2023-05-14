@@ -16,8 +16,11 @@ type IViewProps = {
     }[];
     opacity: number;
   };
+  showModalDelete: boolean;
   onPlay: (music: IMusic) => void;
-  handleDeleteMusicPlaylist: (music: IMusic) => void;
+  handleDeleteMusicPlaylist: () => void;
+  handleShowModalExclude: () => void;
+  handleCloseModalExclude: () => void;
 };
 
 export { IProps, IViewProps };
