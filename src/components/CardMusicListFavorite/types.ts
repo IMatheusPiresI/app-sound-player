@@ -12,8 +12,11 @@ type IViewProps = {
       translateX: number;
     }[];
   };
+  showModalRemoveFavorite: boolean;
   deleteAnimate: () => void;
   handlePlayMusicToFavorites: () => void;
+  handleShowModalRemoveFavorite: () => void;
+  handleCloseModalRemoveFavorite: () => void;
 };
 
 export { IProps, IViewProps };

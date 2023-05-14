@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React, { createElement, useState } from 'react';
 import TrackPlayer, {
   State,
   usePlaybackState,
@@ -27,6 +27,16 @@ export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   );
   const navigation = useNavigation();
   const playbackState = usePlaybackState();
+  const [showModalRemoveFavorite, setShowModalRemoveFavorite] =
+    useState<boolean>(false);
+
+  const handleShowModalRemoveFavorite = () => {
+    setShowModalRemoveFavorite(true);
+  };
+
+  const handleCloseModalRemoveFavorite = () => {
+    setShowModalRemoveFavorite(false);
+  };
 
   const deleteAnimate = () => {
     cardAnimate.value = withTiming(1, { duration: 500 });
@@ -37,6 +47,7 @@ export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   };
 
   const handleRemoveMusicToFavorite = async () => {
+    handleCloseModalRemoveFavorite();
     try {
       deleteAnimate();
       await removeMusicToFavorite(user.id, music);
@@ -83,8 +94,11 @@ export const CardMusicListFavorite: React.FC<IProps> = ({ music }) => {
   const viewProps: IViewProps = {
     music,
     rAnimatedRemoveFavorite,
+    showModalRemoveFavorite,
     deleteAnimate: handleRemoveMusicToFavorite,
     handlePlayMusicToFavorites,
+    handleShowModalRemoveFavorite,
+    handleCloseModalRemoveFavorite,
   };
 
   return createElement(View, viewProps);
